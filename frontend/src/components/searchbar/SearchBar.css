@@ -1,12 +1,17 @@
-.searchbar-placeholder {
-  height: 40px;
-  width: 200px;
-  background-color: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-size: 1rem;
-  border-radius: 8px;
-  margin: 10px;
+/* SearchBar styles */
+.search-bar {
+  margin: 10px 0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+  transition: border 0.2s ease-in-out;
+}
+
+.search-bar input:focus {
+  border: 1px solid #4b9cfb;
+  outline: none;
 }

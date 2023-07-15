@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
 import Modal from "../common/Modal";
+import "./Post.css";
 
 const Post = ({
   post,
@@ -80,7 +81,11 @@ const Post = ({
       <div className="post-content">
         <div className="message">{post.message}</div>
         <div className="interactive-area">
-          <button id="post-likes" className="like-button" onClick={handlePostLike}>
+          <button
+            id="post-likes"
+            className="like-button"
+            onClick={handlePostLike}
+          >
             <svg
               className={`like-icon ${liked ? "liked" : ""}`}
               viewBox="0 0 20 20"

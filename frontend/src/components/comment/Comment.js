@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Comment.css";
 
 const Comment = ({
   comment,
@@ -33,7 +34,11 @@ const Comment = ({
       <div className="time">{comment.time}</div>
       <div className="comment">{comment.comment}</div>
       <div className="interactive-area">
-        <div id="comment-like" className="like-button" onClick={handleCommentLike}>
+        <div
+          id="comment-like"
+          className="like-button"
+          onClick={handleCommentLike}
+        >
           <svg
             className={`like-icon ${liked ? "liked" : ""}`}
             viewBox="0 0 20 20"

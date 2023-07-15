@@ -1,0 +1,62 @@
+/* Customise the comment section for tree-style view */
+.comment-container {
+  border: 1px solid #dddfe2;
+  padding: 10px;
+  background-color: #f5f6f7;
+  margin-left: 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.comment-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #e4e6e9;
+}
+
+.comment-container .username {
+  color: #365899;
+  font-weight: bold;
+}
+
+.comment-container .time {
+  font-size: 0.8em;
+  color: #606770;
+}
+
+.comment-container .comment {
+  color: #1d2129;
+}
+
+/* Redesign comment form */
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.comment-form input {
+  flex-grow: 1;
+  height: 35px;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+}
+
+.comment-form button {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.comment-form button:hover {
+  background-color: #365899;
+}
+
+.interactive-area {
+  display: flex;
+  justify-content: flex-end;
+}

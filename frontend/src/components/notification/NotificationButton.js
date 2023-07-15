@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../common/Modal";
+import "./Notification.css"
 
 const NotificationModal = ({ onClose }) => {
   const [notifications, setNotifications] = useState([]);
