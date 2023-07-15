@@ -1,12 +1,19 @@
+.link {
+  text-decoration: none;
+  color: black; /* Initial color of the link */
+}
+
+.link:hover {
+  color: #007bff; /* Color of the link when the mouse hovers over it */
+}
+
 .username {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #365899;
-  cursor: pointer;
+  font-weight: bold; /* Makes the username text bold */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
 .username:hover {
-  text-decoration: underline;
+  color: #28a745; /* Color of the username when the mouse hovers over it */
 }
 
 .time {

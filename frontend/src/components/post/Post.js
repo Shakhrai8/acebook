@@ -76,7 +76,7 @@ const Post = ({
           <img className="author-image" src={authorImgSrc} alt="Author" />
         </div>
         <div className="text-details">
-          <Link to={`/users/${post.authorId}`}>
+          <Link to={`/users/${post.authorId}`} className="link">
             <div className="username">@{post.username}</div>
           </Link>
           <div className="time">{post.time}</div>
