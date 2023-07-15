@@ -23,6 +23,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   width: 100%; /* Set the width to 100% */
   box-sizing: border-box; /* Add this line */
+  margin-bottom: 20px;
 }
 
 .header h1 {
