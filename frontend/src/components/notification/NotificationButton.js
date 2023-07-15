@@ -28,6 +28,32 @@ const NotificationModal = ({ onClose }) => {
     }
   }, [token]);
 
+  const deleteNotification = (id) => {
+    fetch(`/notifications/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setNotifications(
+          notifications.filter((notification) => notification._id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  };
+
   return (
     <Modal open={true} onClose={onClose}>
       <div className="modal-content">
@@ -46,6 +72,9 @@ const NotificationModal = ({ onClose }) => {
               <div className="notification-item" key={notification._id}>
                 <p>{notification.message}</p>
                 <button onClick={scrollToPost}>View Post</button>
+                <button onClick={() => deleteNotification(notification._id)}>
+                  Dismiss
+                </button>
               </div>
             );
           })}

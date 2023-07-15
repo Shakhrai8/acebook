@@ -4,5 +4,6 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", NotificationController.Index);
+router.delete("/:id", NotificationController.Delete);
 
 module.exports = router;
