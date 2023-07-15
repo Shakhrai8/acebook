@@ -9,7 +9,7 @@ const ProfileController = {
       if (!user) {
         res.status(404).json({ message: "User not found" });
       } else {
-        const { name, username, bio, followers, image } = user;
+        const { name, username, bio, followers, following, image } = user;
 
         const posts = await Post.find({ authorId: user._id });
 
@@ -20,6 +20,7 @@ const ProfileController = {
           username,
           bio,
           followers,
+          following,
           image,
           posts,
           token,

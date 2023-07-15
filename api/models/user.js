@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   name: { type: String, default: "" },
   bio: { type: String, default: "" },
-  followers: { type: Number, default: 0 },
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   image: {
     data: Buffer,
     contentType: String,

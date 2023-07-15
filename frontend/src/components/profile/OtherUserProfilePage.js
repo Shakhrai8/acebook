@@ -5,11 +5,11 @@ import "./ProfilePage.css";
 
 const OtherUserProfilePage = () => {
   const { id } = useParams();
-  console.log(`id is ${id}`);
   const [profileData, setProfileData] = useState(null);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profileImageSrc, setProfileImageSrc] = useState(null);
+  console.log(profileData);
 
   useEffect(() => {
     fetchProfileData();
@@ -48,6 +48,22 @@ const OtherUserProfilePage = () => {
       });
   };
 
+  const handleFollowClick = () => {
+    fetch(`/users/${id}/updateFollow`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        fetchProfileData(); // Fetch profile data again to reflect the updated followers count
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const handleProfileDataChange = () => {
     fetchProfileData();
   };
@@ -56,7 +72,7 @@ const OtherUserProfilePage = () => {
     return <div>Loading profile...</div>;
   }
 
-  const { username, followers, posts } = profileData;
+  const { username, followers, following, posts } = profileData;
 
   return (
     <div className="container">
@@ -82,7 +98,25 @@ const OtherUserProfilePage = () => {
         </div>
         <div className="username-followers-container">
           <p className="username">@{username}</p>
-          <p className="followers">{followers} Followers</p>
+          <div className="stats-container">
+            <div className="followers-container">
+              <p className="followers-number">{followers.length}</p>
+              <p className="followers">Followers</p>
+            </div>
+            <div className="following-container">
+              <p className="following-number">{following.length}</p>
+              <p className="following">Following</p>
+            </div>
+            <div className="posts-container">
+              <p className="posts-number">{posts.length}</p>
+              <p className="posts">Posts</p>
+            </div>
+          </div>
+          <button onClick={handleFollowClick} className="edit-profile-btn">
+            {profileData.followers.includes(localStorage.getItem("userId"))
+              ? "Unfollow"
+              : "Follow"}
+          </button>
         </div>
         <div className="bio-container">
           <h3 className="bio-label">Biography</h3>

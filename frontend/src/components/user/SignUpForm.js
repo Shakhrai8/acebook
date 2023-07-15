@@ -10,7 +10,7 @@ const SignUpForm = ({ onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
+    fetch("/user", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

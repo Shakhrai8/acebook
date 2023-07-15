@@ -42,51 +42,27 @@ const UsersController = {
       });
     });
   },
-  GetProfile: async (req, res) => {
+  UpdateFollow: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-      if (!user) {
-        res.status(404).json({ message: "User not found" });
+      const currentUser = await User.findById(req.user_id);
+      console.log(req.user_id);
+      console.log(`user: ${user}`);
+      console.log(`current user: ${currentUser}`);
+
+      if (!user.followers.includes(req.user_id)) {
+        // Follow the user
+        await user.updateOne({ $push: { followers: req.user_id } });
+        await currentUser.updateOne({ $push: { following: req.params.id } });
+        res.status(200).json("User has been followed");
       } else {
-        const { name, username, bio, followers, image } = user;
-
-        const posts = await Post.find({ authorId: user._id });
-
-        const token = await TokenGenerator.jsonwebtoken(req.params.id);
-
-        res.status(200).json({
-          name,
-          username,
-          bio,
-          followers,
-          image,
-          posts,
-          token,
-          posts,
-        });
+        // Unfollow the user
+        await user.updateOne({ $pull: { followers: req.user_id } });
+        await currentUser.updateOne({ $pull: { following: req.params.id } });
+        res.status(200).json("User has been unfollowed");
       }
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: err.toString() });
-    }
-  },
-  GetProfileImage: async (req, res) => {
-    try {
-      const user = await User.findById(req.params.id);
-
-      if (!user || !user.image.data) {
-        res.status(404).json({ message: "Image not found" });
-      } else {
-        const image = Buffer.from(user.image.data, "base64");
-        res.writeHead(200, {
-          "Content-Type": user.image.contentType,
-          "Content-Length": image.length,
-        });
-        res.end(image);
-      }
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: err.toString() });
+      res.status(500).json(err);
     }
   },
 };

@@ -9,6 +9,7 @@ const Comment = ({
   handleUpdatedCommentLikes,
 }) => {
   const [liked, setLiked] = useState(false);
+  const currentUserId = localStorage.getItem("userId");
 
   const handleCommentLike = async () => {
     setLiked(!liked);
@@ -31,7 +32,14 @@ const Comment = ({
 
   return (
     <div className="comment-container" data-cy="comment" key={comment._id}>
-      <Link to={`/users/${comment.authorId}`}>
+      <Link
+        to={
+          currentUserId === comment.authorId
+            ? `/profiles/${comment.authorId}`
+            : `/users/${comment.authorId}`
+        }
+        className="link"
+      >
         <div className="username">@{comment.username}</div>
       </Link>
       <div className="time">{comment.time}</div>

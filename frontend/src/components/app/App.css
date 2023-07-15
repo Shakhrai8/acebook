@@ -35,7 +35,7 @@ body {
   display: flex;
   height: calc(100% - 60px); /* Subtract header height */
   justify-content: space-between;
-  margin-right: 400px;
+  margin-right: 200px;
 }
 
 .content {
