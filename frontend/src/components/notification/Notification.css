@@ -4,9 +4,9 @@
 .profile-button {
   padding: 6px 16px;
   font-weight: 600;
-  color: #4b4f56;
-  background-color: #f5f6f7;
-  border: 1px solid #ccd0d5;
+  color: white; /* Changed to white to contrast with blue background */
+  background-color: #4267b2; /* Facebook blue */
+  border: 1px solid #29487d; /* Darker blue for border */
   border-radius: 50%; /* Changed to circle */
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
@@ -15,7 +15,7 @@
 .notification-button:hover,
 .navbar-button-top:hover,
 .profile-button:hover {
-  background-color: #e4e6e9;
+  background-color: #315498; /* Darker blue for hover */
   transform: scale(1.1); /* Adding hover effect */
 }
 
@@ -41,4 +41,20 @@
 .notification-item {
   border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
+}
+
+/* Styling for buttons inside the notification item */
+.notification-item button {
+  background-color: #4267b2; /* Facebook blue */
+  color: white; /* White text */
+  border: none;
+  border-radius: 2px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover effect for buttons */
+.notification-item button:hover {
+  background-color: #315498; /* Darker blue for hover */
 }
