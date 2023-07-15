@@ -1,6 +1,8 @@
 const Comment = require("../models/comment");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
+const Notification = require("../models/notification");
+const Post = require("../models/post");
 
 const CommentsController = {
   Index: (req, res) => {
@@ -12,7 +14,7 @@ const CommentsController = {
       res.status(200).json({ comments: comments, token: token });
     });
   },
-  Create: (req, res) => {
+  Create: async (req, res) => {
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -23,37 +25,64 @@ const CommentsController = {
       return `${hours}:${minutes} ${day}-${month}-${year}`;
     };
 
-    const findUser = () => {
-      return User.findById(req.user_id)
-        .then((user) => {
-          return user.username;
-        })
-        .then((username) => {
-          const comment = new Comment({
-            username: username,
-            time: timeCalc(),
-            comment: req.body.comment,
-            postId: req.body.postId,
-            authorId: req.user_id,
-          });
-          comment.save(async (err) => {
-            if (err) {
-              throw err;
-            }
+    try {
+      const user = await User.findById(req.user_id);
+      const post = await Post.findById(req.body.postId);
 
-            const token = await TokenGenerator.jsonwebtoken(req.user_id);
-            res
-              .status(201)
-              .json({ message: "OK", token: token, comment: comment }); // Return the comment
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-          return err;
+      if (!post) {
+        res.status(404).json({ message: "Post not found" });
+        return;
+      }
+
+      const username = user.username;
+
+      const comment = new Comment({
+        username: username,
+        time: timeCalc(),
+        comment: req.body.comment,
+        postId: req.body.postId,
+        authorId: req.user_id,
+      });
+
+      await comment.save();
+
+      // Send notification to the post's author if the author is not the one who commented
+      if (req.user_id.toString() !== post.authorId.toString()) {
+        const notification = new Notification({
+          type: "comment",
+          postId: post._id,
+          userId: post.authorId,
+          message: `New comment on your post by @${username}`,
         });
-    };
-    findUser();
+
+        await notification.save();
+      }
+
+      const mentionedUsernames = req.body.comment?.match(/@(\w+)/g) || [];
+      for (let mentionedUsername of mentionedUsernames) {
+        const mentionedUser = await User.findOne({
+          username: mentionedUsername.replace("@", ""),
+        });
+        if (mentionedUser) {
+          const notification = new Notification({
+            type: "mention",
+            postId: post._id,
+            userId: mentionedUser._id,
+            message: `You have been mentioned in a post by the user @${username}.`,
+          });
+
+          await notification.save();
+        }
+      }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token, comment: comment }); // Return the comment
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
   },
+
   UpdateLikes: (req, res) => {
     Comment.findById(req.params.commentId, async (err, comment) => {
       if (err) {
