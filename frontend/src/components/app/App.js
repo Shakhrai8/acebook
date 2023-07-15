@@ -14,6 +14,8 @@ import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
+import OtherUserProfilePage from "../profile/OtherUserProfilePage";
+
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
 import jwt_decode from "jwt-decode";
@@ -100,10 +102,14 @@ const App = () => {
             ) : null}
             <Routes>
               <Route
-                path="/"
+                path="*"
                 element={
                   isUserLoggedIn ? (
-                    <Feed navigate={navigate} searchTerm={searchTerm} />
+                    <Feed
+                      navigate={navigate}
+                      searchTerm={searchTerm}
+                      isUserLoggedIn={isUserLoggedIn}
+                    />
                   ) : (
                     <div id="login-placeholder">
                       Please log in to see the feed.
@@ -112,13 +118,25 @@ const App = () => {
                 }
               />
               <Route
-                path="/profiles/:id"
+                path="/profiles/:id/*"
                 element={
                   isUserLoggedIn ? (
                     <Profile userId={userId} />
                   ) : (
                     <div id="login-placeholder">
                       Please log in to see the profile.
+                    </div>
+                  )
+                }
+              />
+              <Route
+                path="/users/:id"
+                element={
+                  isUserLoggedIn ? (
+                    <OtherUserProfilePage />
+                  ) : (
+                    <div id="login-placeholder">
+                      Please log in to view other profiles.
                     </div>
                   )
                 }

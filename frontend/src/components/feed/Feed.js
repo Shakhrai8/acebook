@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostForm from "../post/PostForm";
 
-const Feed = ({ navigate, searchTerm }) => {
+const Feed = ({ navigate, searchTerm, isUserLoggedIn }) => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -100,6 +100,7 @@ const Feed = ({ navigate, searchTerm }) => {
                     handleNewComment={handleNewComment}
                     comments={comments}
                     handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                    isUserLoggedIn={isUserLoggedIn}
                   />
                 </div>
               ))}

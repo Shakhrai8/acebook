@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
 import Modal from "../common/Modal";
@@ -11,6 +12,7 @@ const Post = ({
   handleNewComment,
   comments,
   handleUpdatedCommentLikes,
+  isUserLoggedIn,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -74,7 +76,9 @@ const Post = ({
           <img className="author-image" src={authorImgSrc} alt="Author" />
         </div>
         <div className="text-details">
-          <div className="username">@{post.username}</div>
+          <Link to={`/users/${post.authorId}`}>
+            <div className="username">@{post.username}</div>
+          </Link>
           <div className="time">{post.time}</div>
         </div>
       </div>

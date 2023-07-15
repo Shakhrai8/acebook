@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-import ProfileImageForm from "./ProfileImageForm";
-import ProfileInfoForm from "./ProfileInfoForm";
 import Post from "../post/Post";
+import { useParams } from "react-router-dom";
 import "./ProfilePage.css";
 
-const ProfilePage = ({ userId, onClose }) => {
+const OtherUserProfilePage = () => {
+  const { id } = useParams();
+  console.log(`id is ${id}`);
   const [profileData, setProfileData] = useState(null);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profileImageSrc, setProfileImageSrc] = useState(null);
-  const [showImageModal, setShowImageModal] = useState(false);
-  const [showInfoModal, setShowInfoModal] = useState(false);
-  const [profileImageFetched, setProfileImageFetched] = useState(false);
 
   useEffect(() => {
     fetchProfileData();
   }, []);
 
   const fetchProfileData = () => {
-    fetch(`/profiles/${userId}`, {
+    fetch(`/users/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -30,7 +28,7 @@ const ProfilePage = ({ userId, onClose }) => {
         setBio(data.bio);
 
         if (data.image) {
-          fetch(`/profiles/${userId}/profileImage`, {
+          fetch(`/users/${id}/profileImage`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -51,10 +49,6 @@ const ProfilePage = ({ userId, onClose }) => {
   };
 
   const handleProfileDataChange = () => {
-    fetchProfileData();
-  };
-
-  const handleProfileImageChange = () => {
     fetchProfileData();
   };
 
@@ -79,12 +73,6 @@ const ProfilePage = ({ userId, onClose }) => {
               className="profile-picture"
             />
           </div>
-          <button
-            className="change-image-button"
-            onClick={() => setShowImageModal(true)}
-          >
-            Change Image
-          </button>
         </div>
       </div>
 
@@ -100,35 +88,10 @@ const ProfilePage = ({ userId, onClose }) => {
           <h3 className="bio-label">Biography</h3>
           <p className="bio">{bio}</p>
         </div>
-        <button
-          className="edit-profile-btn"
-          onClick={() => setShowInfoModal(true)}
-        >
-          Edit Profile
-        </button>
       </div>
 
-      {/* Modals for image and info forms */}
-      {showImageModal && (
-        <ProfileImageForm
-          token={localStorage.getItem("token")}
-          onProfileImageChange={handleProfileImageChange}
-          userId={userId}
-          onClose={() => setShowImageModal(false)}
-        />
-      )}
-      {showInfoModal && (
-        <ProfileInfoForm
-          token={localStorage.getItem("token")}
-          onProfileDataChange={handleProfileDataChange}
-          currentData={profileData}
-          userId={userId}
-          onClose={() => setShowInfoModal(false)}
-        />
-      )}
-
       <div className="my-posts-container">
-        <h2>My Posts</h2>
+        <h2>{username} Posts</h2>
         <div className="my-posts">
           {posts.map((post) => (
             <div key={post._id} className="post-container">
@@ -146,4 +109,4 @@ const ProfilePage = ({ userId, onClose }) => {
   );
 };
 
-export default ProfilePage;
+export default OtherUserProfilePage;
