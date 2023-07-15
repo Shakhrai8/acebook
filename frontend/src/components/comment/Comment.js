@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Comment.css";
 
 const Comment = ({
@@ -30,7 +31,9 @@ const Comment = ({
 
   return (
     <div className="comment-container" data-cy="comment" key={comment._id}>
-      <div className="username">@{comment.username}</div>
+      <Link to={`/users/${comment.authorId}`}>
+        <div className="username">@{comment.username}</div>
+      </Link>
       <div className="time">{comment.time}</div>
       <div className="comment">{comment.comment}</div>
       <div className="interactive-area">

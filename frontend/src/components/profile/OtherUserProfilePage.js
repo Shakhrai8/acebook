@@ -61,7 +61,7 @@ const OtherUserProfilePage = () => {
   return (
     <div className="container">
       <header className="header">
-        <h1>My Profile</h1>
+        <h1>Profile</h1>
       </header>
 
       <div className="banner">
@@ -91,7 +91,7 @@ const OtherUserProfilePage = () => {
       </div>
 
       <div className="my-posts-container">
-        <h2>{username} Posts</h2>
+        <h2>Posts</h2>
         <div className="my-posts">
           {posts.map((post) => (
             <div key={post._id} className="post-container">
