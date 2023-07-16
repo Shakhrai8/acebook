@@ -90,7 +90,7 @@ const Post = ({
           <div className="time">{post.time}</div>
         </div>
       </div>
-      <div className="post-content">
+      <div className="post-content" id={post._id}>
         <div className="message">{post.message}</div>
         <div className="interactive-area">
           <button
@@ -115,7 +115,6 @@ const Post = ({
         className={`post-container ${isZoomed ? "zoom-active" : ""}`}
         data-cy="post"
         key={post._id}
-        id={post._id}
       >
         {imgSrc && (
           <div className="post-image-container">

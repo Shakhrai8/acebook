@@ -9,7 +9,15 @@ const NotificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "posts",
   },
+  commentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "posts",
+  },
   userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
+  originUserId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },

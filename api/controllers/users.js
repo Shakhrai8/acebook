@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Notification = require("../models/notification");
 const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt");
@@ -46,14 +47,21 @@ const UsersController = {
     try {
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.user_id);
-      console.log(req.user_id);
-      console.log(`user: ${user}`);
-      console.log(`current user: ${currentUser}`);
 
       if (!user.followers.includes(req.user_id)) {
         // Follow the user
         await user.updateOne({ $push: { followers: req.user_id } });
         await currentUser.updateOne({ $push: { following: req.params.id } });
+
+        const notification = new Notification({
+          type: "follow",
+          userId: user._id,
+          originUserId: req.user_id,
+          message: `@${currentUser.username} started following you.`,
+        });
+
+        await notification.save();
+
         res.status(200).json("User has been followed");
       } else {
         // Unfollow the user

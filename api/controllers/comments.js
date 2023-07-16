@@ -50,8 +50,9 @@ const CommentsController = {
       if (req.user_id.toString() !== post.authorId.toString()) {
         const notification = new Notification({
           type: "comment",
-          postId: post._id,
-          userId: post.authorId,
+          commentId: comment._id,
+          userId: comment.authorId,
+          originUserId: req.user_id,
           message: `New comment on your post by @${username}`,
         });
 
@@ -66,8 +67,9 @@ const CommentsController = {
         if (mentionedUser) {
           const notification = new Notification({
             type: "mention",
-            postId: post._id,
+            commentId: comment._id,
             userId: mentionedUser._id,
+            originUserId: req.user_id,
             message: `You have been mentioned in a post by the user @${username}.`,
           });
 

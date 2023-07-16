@@ -31,7 +31,12 @@ const Comment = ({
   };
 
   return (
-    <div className="comment-container" data-cy="comment" key={comment._id}>
+    <div
+      className="comment-container"
+      data-cy="comment"
+      key={comment._id}
+      id={comment._id}
+    >
       <Link
         to={
           currentUserId === comment.authorId

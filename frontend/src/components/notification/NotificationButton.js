@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../common/Modal";
-import "./Notification.css"
+import "./Notification.css";
+import { Link } from "react-router-dom";
 
 const NotificationModal = ({ onClose }) => {
   const [notifications, setNotifications] = useState([]);
@@ -55,6 +56,16 @@ const NotificationModal = ({ onClose }) => {
       });
   };
 
+  const scrollToElement = (elementId) => {
+    const element = document.getElementById(elementId);
+    element?.scrollIntoView({ behavior: "smooth" });
+    // Add the highlight class
+    element?.classList.add("highlight");
+    // Remove the highlight class after some delay
+    setTimeout(() => element?.classList.remove("highlight"), 5000);
+    onClose();
+  };
+
   return (
     <Modal open={true} onClose={onClose}>
       <div className="modal-content">
@@ -63,16 +74,44 @@ const NotificationModal = ({ onClose }) => {
         </button>
         <div className="notifications-list">
           {notifications.map((notification) => {
-            const scrollToPost = () => {
-              const postElement = document.getElementById(notification.postId);
-              postElement?.scrollIntoView({ behavior: "smooth" });
-              onClose();
-            };
+            let buttonText;
+            let actionOnClick;
+            let linkPath;
+
+            switch (notification.type) {
+              case "follow":
+                buttonText = "View User";
+                linkPath = `/users/${notification.originUserId}`;
+                break;
+              case "mention":
+                buttonText = "View Mention";
+                actionOnClick = () => {
+                  if (notification.postId) {
+                    scrollToElement(notification.postId);
+                  } else if (notification.commentId) {
+                    scrollToElement(notification.commentId);
+                  }
+                };
+                break;
+              case "comment":
+                buttonText = "View Comment";
+                actionOnClick = () => scrollToElement(notification.commentId);
+                break;
+              default:
+                buttonText = "View Post";
+                actionOnClick = () => scrollToElement(notification.postId);
+            }
 
             return (
               <div className="notification-item" key={notification._id}>
                 <p>{notification.message}</p>
-                <button onClick={scrollToPost}>View Post</button>
+                {linkPath ? (
+                  <Link to={linkPath} onClick={onClose}>
+                    <button>{buttonText}</button>
+                  </Link>
+                ) : (
+                  <button onClick={actionOnClick}>{buttonText}</button>
+                )}
                 <button onClick={() => deleteNotification(notification._id)}>
                   Dismiss
                 </button>

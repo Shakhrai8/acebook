@@ -75,42 +75,38 @@ const Feed = ({ navigate, searchTerm, isUserLoggedIn }) => {
     );
   };
 
-  if (token && token !== "null" && token !== "undefined") {
-    return (
-      <>
-        <div className="create-post-container">
-          <PostForm token={token} onNewPost={handleNewPost} posts={posts} />
+  return (
+    <>
+      <div className="create-post-container">
+        <PostForm token={token} onNewPost={handleNewPost} posts={posts} />
+      </div>
+      <div className="main-posts-container">
+        <h2>Posts</h2>
+        <div id="feed" role="feed">
+          {posts
+            .filter((post) =>
+              post.message.toLowerCase().includes(searchTerm.toLowerCase())
+            ) // Add filtering based on searchTerm here
+            .map((post) => (
+              <div key={post._id} className="post-container">
+                <Post
+                  post={post}
+                  token={token}
+                  setToken={setToken}
+                  likes={post.likes}
+                  onUpdatedLikes={handleUpdatedLikes}
+                  navigate={navigate}
+                  handleNewComment={handleNewComment}
+                  comments={comments}
+                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  isUserLoggedIn={isUserLoggedIn}
+                />
+              </div>
+            ))}
         </div>
-        <div className="main-posts-container">
-          <h2>Posts</h2>
-          <div id="feed" role="feed">
-            {posts
-              .filter((post) =>
-                post.message.toLowerCase().includes(searchTerm.toLowerCase())
-              ) // Add filtering based on searchTerm here
-              .map((post) => (
-                <div key={post._id} className="post-container">
-                  <Post
-                    post={post}
-                    token={token}
-                    setToken={setToken}
-                    likes={post.likes}
-                    onUpdatedLikes={handleUpdatedLikes}
-                    navigate={navigate}
-                    handleNewComment={handleNewComment}
-                    comments={comments}
-                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                    isUserLoggedIn={isUserLoggedIn}
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
-      </>
-    );
-  } else {
-    return <h2>You must be logged in to view the posts</h2>;
-  }
+      </div>
+    </>
+  );
 };
 
 export default Feed;

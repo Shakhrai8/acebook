@@ -58,3 +58,8 @@
 .notification-item button:hover {
   background-color: #315498; /* Darker blue for hover */
 }
+
+.highlight {
+  background-color: yellow; /* Choose the color that fits your design */
+  transition: background-color 2s ease-out;
+}
