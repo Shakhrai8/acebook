@@ -73,6 +73,43 @@ const UsersController = {
       res.status(500).json(err);
     }
   },
+
+  GetFollowersAndFollowing: async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id)
+        .populate("followers", "username image")
+        .populate("following", "username image");
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const followers = user.followers.map((follower) => ({
+        _id: follower._id,
+        username: follower.username,
+        image: follower.image
+          ? Buffer.from(follower.image.data).toString("base64")
+          : null,
+        type: "follower",
+      }));
+
+      const following = user.following.map((followedUser) => ({
+        _id: followedUser._id,
+        username: followedUser.username,
+        image: followedUser.image
+          ? Buffer.from(followedUser.image.data).toString("base64")
+          : null,
+        type: "following",
+      }));
+
+      const followersAndFollowing = [...followers, ...following];
+
+      res.status(200).json(followersAndFollowing);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
 };
 
 module.exports = UsersController;

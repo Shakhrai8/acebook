@@ -15,6 +15,7 @@ import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
 import OtherUserProfilePage from "../profile/OtherUserProfilePage";
+import FollowerModal from "../followers/FollowerModal";
 
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
@@ -30,6 +31,7 @@ const App = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFollowersModal, setShowFollowersModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const App = () => {
   const handleSignup = () => setShowSignUpForm(true); // Renamed to handleSignup
   const handleNotifications = () => setShowNotificationModal(true);
   const handleLogout = () => setShowLogoutForm(true);
+  const handleFollowersModal = () => setShowFollowersModal(true);
 
   const handleSuccessfulLogin = () => {
     setIsUserLoggedIn(true);
@@ -75,6 +78,7 @@ const App = () => {
           onNotifications={handleNotifications}
           onLogout={handleLogout}
           isUserLoggedIn={isUserLoggedIn}
+          onFollowersModal={handleFollowersModal}
         />
 
         <div className="content">
@@ -175,6 +179,14 @@ const App = () => {
         <NotificationModal
           navigate={navigate}
           onClose={() => setShowNotificationModal(false)}
+        />
+      )}
+
+      {showFollowersModal && (
+        <FollowerModal
+          userId={userId}
+          open={showFollowersModal}
+          onClose={() => setShowFollowersModal(false)}
         />
       )}
     </div>

@@ -92,26 +92,29 @@ const ProfilePage = ({ userId, onClose }) => {
         <div className="name-container">
           <h2 className="name">{name}</h2>
         </div>
-        <div className="stats-container">
-          <div className="followers-container">
-            <p className="followers-number">{followers.length}</p>
-            <p className="followers">Followers</p>
+        <div className="username-followers-container">
+          <p className="username">@{username}</p>
+          <div className="stats-container">
+            <div className="followers-container">
+              <p className="followers-number">{followers.length}</p>
+              <p className="followers">Followers</p>
+            </div>
+            <div className="following-container">
+              <p className="following-number">{following.length}</p>
+              <p className="following">Following</p>
+            </div>
+            <div className="posts-container">
+              <p className="posts-number">{posts.length}</p>
+              <p className="posts">Posts</p>
+            </div>
           </div>
-          <div className="following-container">
-            <p className="following-number">{following.length}</p>
-            <p className="following">Following</p>
-          </div>
-          <div className="posts-container">
-            <p className="posts-number">{posts.length}</p>
-            <p className="posts">Posts</p>
-          </div>
+          <button
+            className="edit-profile-btn"
+            onClick={() => setShowInfoModal(true)}
+          >
+            Edit Profile
+          </button>
         </div>
-        <button
-          className="edit-profile-btn"
-          onClick={() => setShowInfoModal(true)}
-        >
-          Edit Profile
-        </button>
         <div className="bio-container">
           <h3 className="bio-label">Biography</h3>
           <p className="bio">{bio}</p>

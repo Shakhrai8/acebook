@@ -6,6 +6,7 @@ const Navbar = ({
   onNotifications,
   onLogout,
   isUserLoggedIn,
+  onFollowersModal,
 }) => {
   return (
     <div className="navbar">
@@ -23,6 +24,9 @@ const Navbar = ({
             onClick={onNotifications}
           >
             Notification
+          </button>
+          <button className="navbar-button" onClick={onFollowersModal}>
+            Followers
           </button>
           <button className="navbar-button" onClick={onLogout}>
             Logout
