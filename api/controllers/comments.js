@@ -51,7 +51,7 @@ const CommentsController = {
         const notification = new Notification({
           type: "comment",
           commentId: comment._id,
-          userId: comment.authorId,
+          userId: post.authorId,
           originUserId: req.user_id,
           message: `New comment on your post by @${username}`,
         });
