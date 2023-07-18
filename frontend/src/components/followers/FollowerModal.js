@@ -71,9 +71,10 @@ const FollowersModal = ({ userId, open, onClose }) => {
     return URL.createObjectURL(blob);
   };
 
-  if (!profileData) {
-    return <div>Loading profile data...</div>;
-  }
+  // if (!profileData) {
+  //   return <div>Loading profile data...</div>;
+  // }
+  // appears for a split second outside the modal
 
   const followers = profileData.filter((item) => item.type === "follower");
   const following = profileData.filter((item) => item.type === "following");
