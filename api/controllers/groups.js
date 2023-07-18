@@ -4,7 +4,7 @@ const path = require("path");
 
 const defaultImagePath = path.join(
   __dirname,
-  "../public/images/defaultGroupImage.svg.png"
+  "../public/images/default.svg.png"
 );
 
 const defaultImage = {
@@ -19,7 +19,7 @@ const GroupsController = {
     const group = new Group({
       name: name,
       description: description,
-      creator: creator,
+      creator: req.user_id,
       image: defaultImage,
     });
 
@@ -38,8 +38,53 @@ const GroupsController = {
       if (!group) {
         res.status(404).json({ message: "Group not found" });
       } else {
-        res.status(200).json(group);
+        let imageData = null;
+        if (group.image && group.image.data) {
+          const imageBuffer = Buffer.from(group.image.data.buffer);
+          const base64Image = imageBuffer.toString("base64");
+          imageData = `data:${group.image.contentType};base64,${base64Image}`;
+        }
+        res.status(200).json({
+          _id: group._id,
+          name: group.name,
+          description: group.description,
+          creator: group.creator,
+          members: group.members,
+          posts: group.posts,
+          image: imageData,
+          createdAt: group.createdAt,
+        });
       }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
+
+  GetAllGroups: async (req, res) => {
+    try {
+      const groups = await Group.find({});
+
+      const groupData = groups.map((group) => {
+        let imageData = null;
+        if (group.image && group.image.data) {
+          const imageBuffer = Buffer.from(group.image.data.buffer);
+          const base64Image = imageBuffer.toString("base64");
+          imageData = `data:${group.image.contentType};base64,${base64Image}`;
+        }
+        return {
+          _id: group._id,
+          name: group.name,
+          description: group.description,
+          creator: group.creator,
+          members: group.members,
+          posts: group.posts,
+          image: imageData,
+          createdAt: group.createdAt,
+        };
+      });
+
+      res.status(200).json(groupData);
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.toString() });

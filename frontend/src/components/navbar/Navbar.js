@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({
   onLogin,
@@ -28,6 +29,9 @@ const Navbar = ({
           <button className="navbar-button" onClick={onFollowersModal}>
             Followers
           </button>
+          <Link to="/groups" className="navbar-button">
+            Groups
+          </Link>
           <button className="navbar-button" onClick={onLogout}>
             Logout
           </button>

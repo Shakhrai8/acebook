@@ -16,6 +16,8 @@ import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
 import OtherUserProfilePage from "../profile/OtherUserProfilePage";
 import FollowerModal from "../followers/FollowerModal";
+import GroupPage from "../group/GroupPage";
+import GroupDetailsPage from "../group/GroupDetailsPage";
 
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
@@ -142,6 +144,26 @@ const App = () => {
                     <div id="login-placeholder">
                       Please log in to view other profiles.
                     </div>
+                  )
+                }
+              />
+              <Route
+                path="/groups"
+                element={
+                  isUserLoggedIn ? (
+                    <GroupPage />
+                  ) : (
+                    <div>Please log in to see the groups.</div>
+                  )
+                }
+              />
+              <Route
+                path="/groups/:id"
+                element={
+                  isUserLoggedIn ? (
+                    <GroupDetailsPage />
+                  ) : (
+                    <div>Please log in to see the group details.</div>
                   )
                 }
               />

@@ -13,6 +13,7 @@ const usersRouter = require("./routes/users");
 const userRouter = require("./routes/user");
 const notificationsRouter = require("./routes/notifications");
 const profilesRouter = require("./routes/profiles");
+const groupsRouter = require("./routes/groups");
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/user", userRouter);
 app.use("/users", tokenChecker, usersRouter);
+app.use("/groups", tokenChecker, groupsRouter);
 // app.use("/", postsRouter); // work this out!!
 
 // catch 404 and forward to error handler
