@@ -29,9 +29,11 @@ const Navbar = ({
           <button className="navbar-button" onClick={onFollowersModal}>
             Followers
           </button>
-          <Link to="/groups" className="navbar-button">
-            Groups
-          </Link>
+          <button className="navbar-button">
+            <Link to="/groups" className="no-link-style">
+              Groups
+            </Link>
+          </button>
           <button className="navbar-button" onClick={onLogout}>
             Logout
           </button>
