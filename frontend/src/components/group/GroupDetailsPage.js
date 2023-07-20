@@ -36,7 +36,7 @@ const GroupDetailsPage = () => {
   }, [id]);
 
   useEffect(() => {
-    setIsOwner(group && group.creator === userId);
+    setIsOwner(group && group.creator._id === userId);
   }, [group, userId]);
 
   if (isLoading) {
