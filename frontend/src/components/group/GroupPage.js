@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Modal from "../common/Modal";
 import GroupForm from "./GroupForm";
 
+import "./Group.css";
+
 const GroupPage = () => {
   const [groups, setGroups] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -24,35 +26,37 @@ const GroupPage = () => {
   }, []);
 
   return (
-    <div className="followers-content">
-      <h2>Groups</h2>
-      <button onClick={handleModal}>Create Group</button>
+    <div className="groups-content">
+      <div className="header-banner">
+        <h2>All Groups</h2>
+        <button onClick={handleModal}>Create Group</button>
+      </div>
       {groups.length > 0 ? (
-        groups.map((group) => (
-          <Link
-            key={group._id}
-            to={`/groups/${group._id}`}
-            className="item-card"
-          >
-            {group.image && (
-              <div className="item-card-image">
-                <img
-                  src={group.image}
-                  alt={group.name}
-                  onLoad={() => setLoading(false)}
-                  style={{ display: isLoading ? "none" : "block" }}
-                />
-                {isLoading && <div className="spinner"></div>}
-              </div>
-            )}
-            <div className="item-card-info-wrapper">
-              <div className="item-card-info">
+        <div className="group-grid">
+          {groups.map((group) => (
+            <Link
+              key={group._id}
+              to={`/groups/${group._id}`}
+              className="group-card"
+            >
+              {group.image && (
+                <div className="group-card-image">
+                  <img
+                    src={group.image}
+                    alt={group.name}
+                    onLoad={() => setLoading(false)}
+                    style={{ display: isLoading ? "none" : "block" }}
+                  />
+                  {isLoading && <div className="spinner"></div>}
+                </div>
+              )}
+              <div className="group-card-info">
                 <h2>{group.name}</h2>
                 <p>{group.description}</p>
               </div>
-            </div>
-          </Link>
-        ))
+            </Link>
+          ))}
+        </div>
       ) : (
         <p>No groups to display</p>
       )}

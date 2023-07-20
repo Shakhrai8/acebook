@@ -34,7 +34,10 @@ const GroupsController = {
 
   GetGroup: async (req, res) => {
     try {
-      const group = await Group.findById(req.params.id);
+      const group = await Group.findById(req.params.id)
+        .populate("creator") // populate the 'creator' field
+        .populate("members") // populate the 'members' field
+        .populate("posts"); // populate the 'posts' field
       if (!group) {
         res.status(404).json({ message: "Group not found" });
       } else {
@@ -129,6 +132,32 @@ const GroupsController = {
           });
         } else {
           res.status(400).json({ message: "No image file received" });
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
+  UpdateDescription: async (req, res) => {
+    try {
+      const group = await Group.findById(req.params.id);
+
+      if (!group) {
+        res.status(404).json({ message: "Group not found" });
+      } else {
+        const { description } = req.body;
+
+        if (description) {
+          group.description = description;
+
+          await group.save();
+
+          res.status(200).json({
+            message: "Group description updated successfully.",
+          });
+        } else {
+          res.status(400).json({ message: "No description received" });
         }
       }
     } catch (err) {

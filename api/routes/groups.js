@@ -16,5 +16,6 @@ router.patch(
   upload.single("image"),
   GroupController.UpdateGroupImage
 );
+router.patch("/:id/description", GroupController.UpdateDescription);
 
 module.exports = router;

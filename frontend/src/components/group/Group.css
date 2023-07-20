@@ -1,0 +1,179 @@
+/* Groups Page CSS */
+
+.groups-content {
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+.header-banner {
+  text-align: center;
+  background-color: #4267b2;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.header-banner h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.header-banner button {
+  font-size: 18px;
+  background-color: #ffffff;
+  color: #4267b2;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-banner button:hover {
+  background-color: #ddd;
+  box-shadow: 0px 12px 20px -10px rgba(221, 221, 221, 0.6);
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.group-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.group-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.16);
+}
+
+.group-card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.group-card-info {
+  padding: 15px;
+}
+
+.group-card-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.group-card-info p {
+  font-size: 16px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+/* Specific Group Page styles */
+
+.group-details {
+  padding: 2rem;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.group-details .group-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.group-details .group-image {
+  max-width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.group-details h2,
+.group-details h3 {
+  margin-bottom: 1rem;
+  color: #4267b2;
+}
+
+.group-details .group-members,
+.group-details .group-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.member-card,
+.post-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member-card img,
+.post-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* Group Form styles */
+
+.modal-content {
+  padding: 20px;
+  position: relative;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-content form button {
+  font-size: 18px;
+  background-color: #4267b2;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content form button:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 12px 20px -10px rgba(0, 86, 179, 0.6);
+}
