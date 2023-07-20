@@ -12,6 +12,7 @@ const FollowersModal = ({ userId, open, onClose }) => {
   }, []);
 
   const fetchProfileData = () => {
+    setLoading(true);
     fetch(`/users/${userId}/followers-and-following`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -20,9 +21,11 @@ const FollowersModal = ({ userId, open, onClose }) => {
       .then((response) => response.json())
       .then((data) => {
         setProfileData(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching profile data:", error);
+        setLoading(false);
       });
   };
 
@@ -76,8 +79,12 @@ const FollowersModal = ({ userId, open, onClose }) => {
   // }
   // appears for a split second outside the modal
 
-  const followers = profileData.filter((item) => item.type === "follower");
-  const following = profileData.filter((item) => item.type === "following");
+  let followers = [];
+  let following = [];
+  if (!isLoading) {
+    followers = profileData.filter((item) => item.type === "follower");
+    following = profileData.filter((item) => item.type === "following");
+  }
 
   let content;
   if (activeTab === "Followers") {
