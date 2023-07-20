@@ -14,25 +14,26 @@ const GroupDetailsPage = () => {
   const [isOwner, setIsOwner] = useState(false);
   const userId = localStorage.getItem("userId");
 
+  const fetchGroup = async () => {
+    try {
+      const response = await fetch(`/groups/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      setGroup(data);
+      setCreator(data.creator);
+      setMembers(data.members);
+      setPosts(data.posts);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchGroup = async () => {
-      try {
-        const response = await fetch(`/groups/${id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        const data = await response.json();
-        setGroup(data);
-        setCreator(data.creator); // set the creator, members, and posts directly from the group data
-        setMembers(data.members);
-        setPosts(data.posts);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchGroup();
+    fetchGroup(); // Use fetchGroup inside useEffect
   }, [id]);
 
   useEffect(() => {
@@ -45,7 +46,12 @@ const GroupDetailsPage = () => {
 
   if (isOwner) {
     return (
-      <GroupOwnerDetailsPage group={group} members={members} posts={posts} />
+      <GroupOwnerDetailsPage
+        group={group}
+        members={members}
+        posts={posts}
+        refetchGroup={fetchGroup}
+      />
     );
   } else {
     return (

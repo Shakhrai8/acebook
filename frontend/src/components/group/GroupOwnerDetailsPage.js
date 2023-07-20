@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ImageUploadForm from "./ImageUploadForm";
 import MemberCard from "./MemberCard";
+import Modal from "../common/Modal";
 import PostCard from "./PostCard";
 
-const GroupOwnerDetailsPage = ({ group, members, posts }) => {
+const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
   const [editingDescription, setEditingDescription] = useState(false);
+  const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   const [description, setDescription] = useState(group.description);
   const [showImageModal, setShowImageModal] = useState(false);
 
@@ -26,6 +28,8 @@ const GroupOwnerDetailsPage = ({ group, members, posts }) => {
       body: JSON.stringify({ description }),
     }).then(() => {
       setEditingDescription(false);
+      setShowDescriptionModal(false); // close the modal
+      refetchGroup(); // refetch group data
     });
   };
 
@@ -44,7 +48,6 @@ const GroupOwnerDetailsPage = ({ group, members, posts }) => {
         >
           Change Image
         </button>
-
         {showImageModal && (
           <ImageUploadForm
             groupId={group._id}
@@ -52,20 +55,28 @@ const GroupOwnerDetailsPage = ({ group, members, posts }) => {
             onClose={() => setShowImageModal(false)}
           />
         )}
-
         <p>Created by: {group.creator.username}</p>
-        {editingDescription ? (
-          <>
+        <Modal
+          open={showDescriptionModal}
+          onClose={() => setShowDescriptionModal(false)}
+        >
+          <div className="modal-content">
+            <button
+              className="close-button"
+              onClick={() => setShowDescriptionModal(false)}
+            >
+              X
+            </button>
+            <p>Choose a new group description:</p>
             <input
               value={description}
               onChange={handleDescriptionChange}
-              onBlur={handleDescriptionSave}
               autoFocus
             />
-          </>
-        ) : (
-          <p onClick={handleDescriptionEdit}>{group.description}</p>
-        )}
+            <button onClick={handleDescriptionSave}>Save</button>
+          </div>
+        </Modal>
+        <p onClick={() => setShowDescriptionModal(true)}>{group.description}</p>
       </div>
       <h3>Members</h3>
       <div className="group-members">
