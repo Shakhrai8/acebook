@@ -104,7 +104,12 @@ const GroupOwnerDetailsPage = ({
       </div>
 
       <div className="create-post-container">
-        <PostForm token={token} onNewPost={handleNewPost} groupId={group._id} />
+        <PostForm
+          token={token}
+          onNewPost={handleNewPost}
+          groupId={group._id}
+          postedAsGroup={true}
+        />
       </div>
 
       <div className="main-posts-container">
@@ -123,6 +128,8 @@ const GroupOwnerDetailsPage = ({
                   handleNewComment={handleNewComment}
                   comments={comments}
                   handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  GroupImage={group.image}
+                  group={group}
                 />
               </div>
             ))}

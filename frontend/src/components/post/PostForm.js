@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const PostForm = ({ token, onNewPost, groupId = null }) => {
+const PostForm = ({
+  token,
+  onNewPost,
+  groupId = null,
+  postedAsGroup = false,
+}) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
 
@@ -14,6 +19,7 @@ const PostForm = ({ token, onNewPost, groupId = null }) => {
     }
     if (groupId) {
       formData.append("groupId", groupId);
+      formData.append("postedAsGroup", postedAsGroup);
     }
 
     fetch("/posts", {

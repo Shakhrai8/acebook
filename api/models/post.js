@@ -10,6 +10,11 @@ const PostSchema = new mongoose.Schema({
   },
   authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
+  postedAsGroup: {
+    type: Boolean,
+    default: false,
+  },
+
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,

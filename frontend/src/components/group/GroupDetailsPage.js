@@ -166,6 +166,8 @@ const GroupDetailsPage = ({ searchTerm }) => {
                     handleNewComment={handleNewComment}
                     comments={comments}
                     handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                    GroupImage={group.image}
+                    group={group}
                   />
                 </div>
               ))}

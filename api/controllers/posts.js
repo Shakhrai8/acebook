@@ -38,6 +38,7 @@ const PostsController = {
         message: req.body.message,
         authorId: req.user_id,
         groupId: req.body.groupId,
+        postedAsGroup: req.body.postedAsGroup || false,
       });
 
       if (req.file) {

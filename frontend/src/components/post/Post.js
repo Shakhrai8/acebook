@@ -12,6 +12,8 @@ const Post = ({
   handleNewComment,
   comments,
   handleUpdatedCommentLikes,
+  GroupImage,
+  group,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -86,7 +88,11 @@ const Post = ({
     <div className="post-wrapper">
       <div className="author-details">
         <div className="author">
-          <img className="author-image" src={authorImgSrc} alt="Author" />
+          <img
+            className="author-image"
+            src={post.postedAsGroup ? GroupImage : authorImgSrc}
+            alt="Author"
+          />
         </div>
         <div className="text-details">
           <Link
@@ -97,7 +103,9 @@ const Post = ({
             }
             className="link"
           >
-            <div className="username">@{post.username}</div>
+            <div className="username">
+              @{post.postedAsGroup ? group.name : post.username}
+            </div>
           </Link>
           <div className="time">{post.time}</div>
         </div>
