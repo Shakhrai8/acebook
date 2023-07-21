@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ImageUploadForm from "./ImageUploadForm";
+import { Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
 import Modal from "../common/Modal";
 import PostCard from "./PostCard";
@@ -48,7 +49,10 @@ const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
             onClose={() => setShowImageModal(false)}
           />
         )}
-        <p>Created by: {group.creator.username}</p>
+        Created by{" "}
+        <Link to={`/profiles/${group.creator._id}`} className="link">
+          you
+        </Link>
         <Modal
           open={showDescriptionModal}
           onClose={() => setShowDescriptionModal(false)}
