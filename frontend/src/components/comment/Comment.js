@@ -36,8 +36,8 @@ const Comment = ({
   return (
     <div
       className={`comment-container ${
-        comment.postedAsGroup ? "group-comment-main" : ""
-      } ${currentUserId === comment.authorId ? "own-comment" : ""}`}
+        comment.postedAsGroup ? "own-comment" : ""
+      } `}
       data-cy="comment"
       key={comment._id}
       id={comment._id}
