@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../common/Modal";
 
-const ImageUploadForm = ({ groupId, onImageChange, onClose }) => {
+const ImageUploadForm = ({ groupId, refetchGroup, onClose }) => {
   const [image, setImage] = useState(null);
 
   const handleSubmit = (event) => {
@@ -22,8 +22,9 @@ const ImageUploadForm = ({ groupId, onImageChange, onClose }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {
-          onImageChange();
+          refetchGroup();
           setImage(null);
+          onClose();
         }
       })
       .catch((error) => {

@@ -5,14 +5,10 @@ import Modal from "../common/Modal";
 import PostCard from "./PostCard";
 
 const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
-  const [editingDescription, setEditingDescription] = useState(false);
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
+  const [imageUpdateTime, setImageUpdateTime] = useState(Date.now());
   const [description, setDescription] = useState(group.description);
   const [showImageModal, setShowImageModal] = useState(false);
-
-  const handleDescriptionEdit = () => {
-    setEditingDescription(true);
-  };
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
@@ -27,13 +23,10 @@ const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
       },
       body: JSON.stringify({ description }),
     }).then(() => {
-      setEditingDescription(false);
       setShowDescriptionModal(false); // close the modal
       refetchGroup(); // refetch group data
     });
   };
-
-  const handleImageChange = () => {};
 
   return (
     <div className="group-details">
@@ -51,7 +44,7 @@ const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
         {showImageModal && (
           <ImageUploadForm
             groupId={group._id}
-            onImageChange={handleImageChange}
+            refetchGroup={refetchGroup}
             onClose={() => setShowImageModal(false)}
           />
         )}
