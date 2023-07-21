@@ -112,7 +112,7 @@ const FollowersModal = ({ userId, open, onClose }) => {
                     onClick={onClose}
                     className="link"
                   >
-                    <p>@{follower.username}</p>
+                    <p className="member-username">@{follower.username}</p>
                   </Link>
                 </div>
               </div>
@@ -148,7 +148,7 @@ const FollowersModal = ({ userId, open, onClose }) => {
                     onClick={onClose}
                     className="link"
                   >
-                    <p>@{followingUser.username}</p>
+                    <p className="member-username">@{followingUser.username}</p>
                   </Link>
                 </div>
                 <div className="item-card-action">

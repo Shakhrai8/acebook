@@ -12,6 +12,7 @@
   transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
+.member-username:hover,
 .username:hover {
   color: #28a745; /* Color of the username when the mouse hovers over it */
 }
