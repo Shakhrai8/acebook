@@ -103,13 +103,17 @@ body {
   background-color: #365899;
 }
 
-.no-link-style {
-  text-decoration: none;
-  color: inherit;
-  background-color: transparent;
+.link-button {
+  display: inline-block;
+  background-color: #4267b2;
   border: none;
-  padding: 0;
-  margin: 0;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 4px 0;
+  color: #fff; /* set color explicitly */
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
   cursor: pointer;
-  /* Add any other custom styles you want */
+  text-decoration: none; /* remove underline from links */
+  font-size: 0.7em;
 }

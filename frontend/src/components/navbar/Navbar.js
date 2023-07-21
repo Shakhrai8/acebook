@@ -24,16 +24,14 @@ const Navbar = ({
             id="notification-button"
             onClick={onNotifications}
           >
-            Notification
+            Notifications
           </button>
           <button className="navbar-button" onClick={onFollowersModal}>
             Followers
           </button>
-          <button className="navbar-button">
-            <Link to="/groups" className="no-link-style">
-              Groups
-            </Link>
-          </button>
+          <Link to="/groups" className="link-button">
+            Groups
+          </Link>
           <button className="navbar-button" onClick={onLogout}>
             Logout
           </button>
