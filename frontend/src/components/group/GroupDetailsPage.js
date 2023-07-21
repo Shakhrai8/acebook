@@ -87,9 +87,12 @@ const GroupDetailsPage = () => {
 
         <h3>Members</h3>
         <div className="group-members">
-          {members.map((member) => (
+          {members.slice(0, 8).map((member) => (
             <MemberCard key={member._id} member={member} />
           ))}
+          {members.length > 8 && (
+            <div className="members-extra">+{members.length - 8} More</div>
+          )}
         </div>
         <button onClick={handleToggleMembership}>
           {members.find((member) => member._id === userId)
