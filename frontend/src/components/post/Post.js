@@ -85,8 +85,11 @@ const Post = ({
   }, [idToScrollTo]);
 
   return (
-    <div className="post-wrapper">
+    <div
+      className={`post-wrapper ${post.postedAsGroup ? "group-post-main" : ""}`}
+    >
       <div className="author-details">
+        {post.postedAsGroup && <div className="group-tag">Creator</div>}
         <div className="author">
           <img
             className="author-image"
@@ -104,7 +107,7 @@ const Post = ({
             className="link"
           >
             <div className="username">
-              @{post.postedAsGroup ? group.name : post.username}
+              @{post.postedAsGroup ? group?.name : post.username}
             </div>
           </Link>
           <div className="time">{post.time}</div>

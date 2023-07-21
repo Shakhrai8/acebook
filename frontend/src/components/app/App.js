@@ -136,7 +136,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/users/:id"
+                path="/users/:id/*"
                 element={
                   isUserLoggedIn ? (
                     <OtherUserProfilePage />
