@@ -3,7 +3,6 @@ import ImageUploadForm from "./ImageUploadForm";
 import { Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
 import Modal from "../common/Modal";
-import PostCard from "./PostCard";
 import PostForm from "../post/PostForm";
 
 const GroupOwnerDetailsPage = ({
