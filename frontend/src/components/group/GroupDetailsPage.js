@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
 import Post from "../post/Post";
 import GroupOwnerDetailsPage from "./GroupOwnerDetailsPage";
+import PostForm from "../post/PostForm";
 
 const GroupDetailsPage = ({ searchTerm }) => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const GroupDetailsPage = ({ searchTerm }) => {
       setGroup(data);
       setCreator(data.creator);
       setMembers(data.members);
-      setPosts(data.posts);
+      setPosts(data.posts.reverse());
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -95,6 +96,12 @@ const GroupDetailsPage = ({ searchTerm }) => {
     );
   };
 
+  const handleNewPost = (post) => {
+    setPosts((prevPosts) => {
+      return [post, ...prevPosts];
+    });
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -114,6 +121,8 @@ const GroupDetailsPage = ({ searchTerm }) => {
         comments={comments}
         handleUpdatedCommentLikes={handleUpdatedCommentLikes}
         Post={Post}
+        onNewPost={handleNewPost}
+        PostForm={PostForm}
       />
     );
   } else {
@@ -149,6 +158,15 @@ const GroupDetailsPage = ({ searchTerm }) => {
             ? "Leave Group"
             : "Join Group"}
         </button>
+
+        <div className="create-post-container">
+          <PostForm
+            token={token}
+            onNewPost={handleNewPost}
+            groupId={group._id}
+            postedAsGroup={false}
+          />
+        </div>
 
         <div className="main-posts-container">
           <h2>Posts</h2>

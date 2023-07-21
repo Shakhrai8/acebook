@@ -3,14 +3,13 @@ import ImageUploadForm from "./ImageUploadForm";
 import { Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
 import Modal from "../common/Modal";
-import PostForm from "../post/PostForm";
 
 const GroupOwnerDetailsPage = ({
   group,
   members,
   posts,
   refetchGroup,
-  setPosts,
+  PostForm,
   token,
   searchTerm,
   onUpdatedLikes,
@@ -18,6 +17,7 @@ const GroupOwnerDetailsPage = ({
   comments,
   handleUpdatedCommentLikes,
   Post,
+  onNewPost,
 }) => {
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   const [description, setDescription] = useState(group.description);
@@ -38,12 +38,6 @@ const GroupOwnerDetailsPage = ({
     }).then(() => {
       setShowDescriptionModal(false); // close the modal
       refetchGroup(); // refetch group data
-    });
-  };
-
-  const handleNewPost = (post) => {
-    setPosts((prevPosts) => {
-      return [post, ...prevPosts];
     });
   };
 
@@ -106,7 +100,7 @@ const GroupOwnerDetailsPage = ({
       <div className="create-post-container">
         <PostForm
           token={token}
-          onNewPost={handleNewPost}
+          onNewPost={onNewPost}
           groupId={group._id}
           postedAsGroup={true}
         />
