@@ -4,10 +4,23 @@ import { Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
 import Modal from "../common/Modal";
 import PostCard from "./PostCard";
+import PostForm from "../post/PostForm";
 
-const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
+const GroupOwnerDetailsPage = ({
+  group,
+  members,
+  posts,
+  refetchGroup,
+  setPosts,
+  token,
+  searchTerm,
+  onUpdatedLikes,
+  handleNewComment,
+  comments,
+  handleUpdatedCommentLikes,
+  Post,
+}) => {
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
-  const [imageUpdateTime, setImageUpdateTime] = useState(Date.now());
   const [description, setDescription] = useState(group.description);
   const [showImageModal, setShowImageModal] = useState(false);
 
@@ -26,6 +39,12 @@ const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
     }).then(() => {
       setShowDescriptionModal(false); // close the modal
       refetchGroup(); // refetch group data
+    });
+  };
+
+  const handleNewPost = (post) => {
+    setPosts((prevPosts) => {
+      return [post, ...prevPosts];
     });
   };
 
@@ -85,11 +104,30 @@ const GroupOwnerDetailsPage = ({ group, members, posts, refetchGroup }) => {
         )}
       </div>
 
-      <h3>Posts</h3>
-      <div className="group-posts">
-        {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
+      <div className="create-post-container">
+        <PostForm token={token} onNewPost={handleNewPost} groupId={group._id} />
+      </div>
+
+      <div className="main-posts-container">
+        <h2>Posts</h2>
+        <div id="feed" role="feed">
+          {posts
+            .filter((post) =>
+              post.message.toLowerCase().includes(searchTerm.toLowerCase())
+            ) // Add filtering based on searchTerm here
+            .map((post) => (
+              <div key={post._id} className="post-container">
+                <Post
+                  post={post}
+                  token={token}
+                  onUpdatedLikes={onUpdatedLikes}
+                  handleNewComment={handleNewComment}
+                  comments={comments}
+                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

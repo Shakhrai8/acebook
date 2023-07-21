@@ -3,10 +3,11 @@ const Notification = require("../models/notification");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 const fs = require("fs");
+const Group = require("../models/group");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
+    Post.find({ groupId: { $exists: false } }, async (err, posts) => {
       if (err) {
         throw err;
       }
@@ -14,6 +15,7 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
+
   Create: async (req, res) => {
     const timeCalc = () => {
       const now = new Date();
@@ -35,6 +37,7 @@ const PostsController = {
         time: timeCalc(),
         message: req.body.message,
         authorId: req.user_id,
+        groupId: req.body.groupId,
       });
 
       if (req.file) {
@@ -44,6 +47,18 @@ const PostsController = {
       }
 
       await post.save();
+
+      // Add a check to add the post to the group if a groupId was provided
+      if (req.body.groupId) {
+        const group = await Group.findById(req.body.groupId);
+        if (!group) {
+          res.status(404).json({ message: "Group not found" });
+        } else {
+          await group.updateOne({ $push: { posts: post._id } });
+        }
+      }
+
+      // searching for any tagged user(@user for example) inside of the posts body message
       const mentionedUsernames = req.body.message?.match(/@(\w+)/g) || [];
       for (let mentionedUsername of mentionedUsernames) {
         const mentionedUser = await User.findOne({

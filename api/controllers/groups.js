@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const Notification = require("../models/notification");
 const User = require("../models/user");
+const Post = require("../models/post");
 
 const defaultImagePath = path.join(
   __dirname,
@@ -39,7 +40,10 @@ const GroupsController = {
       const group = await Group.findById(req.params.id)
         .populate("creator") // populate the 'creator' field
         .populate("members") // populate the 'members' field
-        .populate("posts"); // populate the 'posts' field
+        .populate({
+          path: "posts",
+          match: { groupId: req.params.id }, // match posts with the same groupId
+        });
       if (!group) {
         res.status(404).json({ message: "Group not found" });
       } else {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import MemberCard from "./MemberCard";
-import PostCard from "./PostCard";
+import Post from "../post/Post";
 import GroupOwnerDetailsPage from "./GroupOwnerDetailsPage";
 
-const GroupDetailsPage = () => {
+const GroupDetailsPage = ({ searchTerm }) => {
   const { id } = useParams();
   const [group, setGroup] = useState(null);
   const [creator, setCreator] = useState(null);
@@ -13,6 +13,8 @@ const GroupDetailsPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const userId = localStorage.getItem("userId");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [comments, setComments] = useState([]);
 
   const fetchGroup = async () => {
     try {
@@ -40,6 +42,24 @@ const GroupDetailsPage = () => {
     setIsOwner(group && group.creator._id === userId);
   }, [group, userId]);
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (token && token !== "null" && token !== "undefined") {
+        const response = await fetch("/comments", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setComments(data.comments.reverse());
+      } else {
+        setComments([]); // Set empty comments array when there is no token
+      }
+    };
+
+    fetchComments();
+  }, [token]);
+
   const handleToggleMembership = async () => {
     await fetch(`/groups/${id}/toggleMembership`, {
       method: "PATCH",
@@ -53,6 +73,28 @@ const GroupDetailsPage = () => {
     fetchGroup(); // refetch group data to update the members list
   };
 
+  const handleNewComment = (comment) => {
+    setComments((prevComments) => {
+      return [comment, ...prevComments];
+    });
+  };
+
+  const handleUpdatedLikes = (postId, likes) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, likes: likes } : post
+      )
+    );
+  };
+
+  const handleUpdatedCommentLikes = (commentId, likes) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment._id === commentId ? { ...comment, likes: likes } : comment
+      )
+    );
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -64,6 +106,14 @@ const GroupDetailsPage = () => {
         members={members}
         posts={posts}
         refetchGroup={fetchGroup}
+        setPosts={setPosts}
+        token={token}
+        searchTerm={searchTerm}
+        onUpdatedLikes={handleUpdatedLikes}
+        handleNewComment={handleNewComment}
+        comments={comments}
+        handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+        Post={Post}
       />
     );
   } else {
@@ -100,11 +150,26 @@ const GroupDetailsPage = () => {
             : "Join Group"}
         </button>
 
-        <h3>Posts</h3>
-        <div className="group-posts">
-          {posts.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
+        <div className="main-posts-container">
+          <h2>Posts</h2>
+          <div id="feed" role="feed">
+            {posts
+              .filter((post) =>
+                post.message.toLowerCase().includes(searchTerm.toLowerCase())
+              ) // Add filtering based on searchTerm here
+              .map((post) => (
+                <div key={post._id} className="post-container">
+                  <Post
+                    post={post}
+                    token={token}
+                    onUpdatedLikes={handleUpdatedLikes}
+                    handleNewComment={handleNewComment}
+                    comments={comments}
+                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  />
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     );

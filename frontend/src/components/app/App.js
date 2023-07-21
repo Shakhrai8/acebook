@@ -161,7 +161,7 @@ const App = () => {
                 path="/groups/:id"
                 element={
                   isUserLoggedIn ? (
-                    <GroupDetailsPage />
+                    <GroupDetailsPage searchTerm={searchTerm} />
                   ) : (
                     <div>Please log in to see the group details.</div>
                   )

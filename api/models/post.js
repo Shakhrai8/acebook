@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema({
     contentType: String,
   },
   authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,

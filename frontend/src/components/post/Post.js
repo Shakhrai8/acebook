@@ -12,7 +12,6 @@ const Post = ({
   handleNewComment,
   comments,
   handleUpdatedCommentLikes,
-  isUserLoggedIn,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);

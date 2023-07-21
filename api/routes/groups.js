@@ -5,6 +5,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const GroupController = require("../controllers/groups");
+const PostsController = require("../controllers/posts");
 
 // Define routes for groups
 router.post("/create", GroupController.Create);
@@ -18,5 +19,7 @@ router.patch(
 );
 router.patch("/:id/toggleMembership", GroupController.ToggleMembership);
 router.patch("/:id/description", GroupController.UpdateDescription);
+
+router.post("/:id/post", PostsController.Create);
 
 module.exports = router;
