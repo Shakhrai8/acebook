@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../common/Modal";
 import "./Notification.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NotificationModal = ({ onClose }) => {
   const [notifications, setNotifications] = useState([]);
   const token = window.localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token && token !== "null" && token !== "undefined") {
@@ -57,12 +58,8 @@ const NotificationModal = ({ onClose }) => {
   };
 
   const scrollToElement = (elementId) => {
-    const element = document.getElementById(elementId);
-    element?.scrollIntoView({ behavior: "smooth" });
-    // Add the highlight class
-    element?.classList.add("highlight");
-    // Remove the highlight class after some delay
-    setTimeout(() => element?.classList.remove("highlight"), 5000);
+    window.localStorage.setItem("scrollToId", elementId);
+    navigate("/");
     onClose();
   };
 

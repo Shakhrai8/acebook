@@ -19,6 +19,7 @@ const Post = ({
   const [authorImgSrc, setAuthorImgSrc] = useState(null);
   const [liked, setLiked] = useState(false);
   const currentUserId = localStorage.getItem("userId");
+  const idToScrollTo = window.localStorage.getItem("scrollToId");
 
   const onClose = () => {
     setIsZoomed(false);
@@ -69,6 +70,18 @@ const Post = ({
         });
     }
   }, [post, token]);
+
+  useEffect(() => {
+    if (idToScrollTo) {
+      const element = document.getElementById(idToScrollTo);
+      element?.scrollIntoView({ behavior: "smooth" });
+      // Add the highlight class
+      element?.classList.add("highlight");
+      // Remove the highlight class after some delay
+      setTimeout(() => element?.classList.remove("highlight"), 5000);
+      window.localStorage.removeItem("scrollToId"); // important to remove after use
+    }
+  }, [idToScrollTo]);
 
   return (
     <div className="post-wrapper">
