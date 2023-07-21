@@ -5,6 +5,10 @@ const NotificationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  groupId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Group",
+  },
   postId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",

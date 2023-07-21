@@ -40,6 +40,19 @@ const GroupDetailsPage = () => {
     setIsOwner(group && group.creator._id === userId);
   }, [group, userId]);
 
+  const handleToggleMembership = async () => {
+    await fetch(`/groups/${id}/toggleMembership`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }), // Add user id
+    });
+
+    fetchGroup(); // refetch group data to update the members list
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -78,6 +91,11 @@ const GroupDetailsPage = () => {
             <MemberCard key={member._id} member={member} />
           ))}
         </div>
+        <button onClick={handleToggleMembership}>
+          {members.find((member) => member._id === userId)
+            ? "Leave Group"
+            : "Join Group"}
+        </button>
 
         <h3>Posts</h3>
         <div className="group-posts">

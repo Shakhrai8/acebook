@@ -1,6 +1,8 @@
 const Group = require("../models/group");
 const fs = require("fs");
 const path = require("path");
+const Notification = require("../models/notification");
+const User = require("../models/user");
 
 const defaultImagePath = path.join(
   __dirname,
@@ -106,6 +108,39 @@ const GroupsController = {
           res.status(200).json("User has been added to the group");
         } else {
           res.status(400).json("User is already a member of the group");
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
+
+  ToggleMembership: async (req, res) => {
+    try {
+      const group = await Group.findById(req.params.id);
+      const user = await User.findById(req.user_id);
+      if (!group) {
+        res.status(404).json({ message: "Group not found" });
+      } else {
+        if (!group.members.includes(req.body.userId)) {
+          // Add member to the group
+          await group.updateOne({ $push: { members: req.body.userId } });
+
+          const notification = new Notification({
+            type: "membership",
+            groupId: group._id,
+            userId: group.creator._id,
+            originUserId: req.body.userId,
+            message: `@${user.username} has joined your group: ${group.name}.`,
+          });
+          await notification.save();
+
+          res.status(200).json("User has been added to the group");
+        } else {
+          // Remove member from the group
+          await group.updateOne({ $pull: { members: req.body.userId } });
+          res.status(200).json("User has been removed from the group");
         }
       }
     } catch (err) {

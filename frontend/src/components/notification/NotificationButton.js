@@ -83,6 +83,10 @@ const NotificationModal = ({ onClose }) => {
                 buttonText = "View User";
                 linkPath = `/users/${notification.originUserId}`;
                 break;
+              case "membership":
+                buttonText = "View User";
+                linkPath = `/users/${notification.originUserId}`;
+                break;
               case "mention":
                 buttonText = "View Mention";
                 actionOnClick = () => {
