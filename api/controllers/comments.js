@@ -42,6 +42,8 @@ const CommentsController = {
         comment: req.body.comment,
         postId: req.body.postId,
         authorId: req.user_id,
+        groupId: req.body.groupId,
+        postedAsGroup: req.body.postedAsGroup || false,
       });
 
       await comment.save();

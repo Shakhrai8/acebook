@@ -124,6 +124,8 @@ const GroupOwnerDetailsPage = ({
                   handleUpdatedCommentLikes={handleUpdatedCommentLikes}
                   GroupImage={group.image}
                   group={group}
+                  groupId={group._id}
+                  postedAsGroup={true}
                 />
               </div>
             ))}

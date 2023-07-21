@@ -60,3 +60,15 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.comment-container.own-comment {
+  /* Apply custom styles for the creator's comment here */
+
+  border: 2px solid #1e90ff; /* DodgerBlue for example */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#comment-feed {
+  margin-top: 20px;
+}

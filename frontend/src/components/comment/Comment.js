@@ -7,6 +7,9 @@ const Comment = ({
   onNewComment,
   token,
   handleUpdatedCommentLikes,
+  group,
+  groupId,
+  postedAsGroup,
 }) => {
   const [liked, setLiked] = useState(false);
   const currentUserId = localStorage.getItem("userId");
@@ -32,22 +35,32 @@ const Comment = ({
 
   return (
     <div
-      className="comment-container"
+      className={`comment-container ${
+        comment.postedAsGroup ? "group-comment-main" : ""
+      } ${currentUserId === comment.authorId ? "own-comment" : ""}`}
       data-cy="comment"
       key={comment._id}
       id={comment._id}
     >
-      <Link
-        to={
-          currentUserId === comment.authorId
-            ? `/profiles/${comment.authorId}`
-            : `/users/${comment.authorId}`
-        }
-        className="link"
-      >
-        <div className="username">@{comment.username}</div>
-      </Link>
-      <div className="time">{comment.time}</div>
+      <div className="author-details">
+        {comment.postedAsGroup && <div className="group-tag">Creator</div>}
+        <div className="text-details">
+          <Link
+            to={
+              currentUserId === comment.authorId
+                ? `/profiles/${comment.authorId}`
+                : `/users/${comment.authorId}`
+            }
+            className="link"
+          >
+            <div className="username">
+              @{comment.postedAsGroup ? group?.name : comment.username}
+            </div>
+          </Link>
+
+          <div className="time">{comment.time}</div>
+        </div>
+      </div>
       <div className="comment">{comment.comment}</div>
       <div className="interactive-area">
         <div

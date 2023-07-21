@@ -14,6 +14,8 @@ const Post = ({
   handleUpdatedCommentLikes,
   GroupImage,
   group,
+  groupId,
+  postedAsGroup,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -168,6 +170,8 @@ const Post = ({
           token={token}
           onNewComment={handleNewComment}
           postId={post._id}
+          groupId={groupId}
+          postedAsGroup={postedAsGroup}
         />
 
         <div id="comment-feed">
@@ -181,6 +185,9 @@ const Post = ({
                     onNewComment={handleNewComment}
                     token={token}
                     handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                    group={group}
+                    groupId={groupId}
+                    postedAsGroup={postedAsGroup}
                   />
                 </div>
               ))}

@@ -1,30 +1,50 @@
 import React, { useState } from "react";
 
-const CommentForm = ({ token, onNewComment, postId }) => {
+const CommentForm = ({
+  token,
+  onNewComment,
+  postId,
+  groupId = null,
+  postedAsGroup = false,
+}) => {
   const [comment, setComment] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/comments", {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      const requestBody = {
         comment: comment,
         postId: postId,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+      };
+
+      if (groupId) {
+        requestBody.groupId = groupId;
+        requestBody.postedAsGroup = postedAsGroup;
+      }
+
+      const response = await fetch("/comments", {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
         console.log("Response data:", data);
         if (data.comment) {
           onNewComment(data.comment);
           setComment("");
         }
-      });
+      } else {
+        console.error("Failed to post comment.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   const handleCommentChange = (event) => {
@@ -42,7 +62,9 @@ const CommentForm = ({ token, onNewComment, postId }) => {
         value={comment}
         onChange={handleCommentChange}
       />
-      <button id="comment-post-button" type="submit">Post</button>
+      <button id="comment-post-button" type="submit">
+        Post
+      </button>
     </form>
   );
 };
