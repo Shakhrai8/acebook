@@ -4,6 +4,7 @@ const ProfileController = require("../controllers/profiles");
 
 const UsersController = require("../controllers/users");
 
+router.get("/all", UsersController.GetAll);
 router.get("/:id", ProfileController.GetProfile);
 router.get("/:id/profileImage", ProfileController.GetProfileImage);
 router.put("/:id/updateFollow", UsersController.UpdateFollow);

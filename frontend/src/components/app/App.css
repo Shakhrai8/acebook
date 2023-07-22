@@ -47,6 +47,7 @@ body {
   border-radius: 8px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 600px;
 }
 
 .top-bar {
@@ -179,17 +180,36 @@ li.menu_list:hover .front {
   color: #fff; /* Adjusted hover colour to match your scheme */
   transform: rotateY(90deg);
 }
-.trending-container {
-  flex: 0 0 25%;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  border-left: 1px solid #ccc;
-  padding-left: 2em;
+
+.dashboard-container {
+  display: block; /* change from flex to block */
+  width: 25%;
+  padding: 2em;
 }
 
-.trending-container h2 {
+.users-to-follow-container,
+.trending-container {
+  flex-basis: 100%; /* this may not be necessary anymore, you can remove if not required */
+  position: relative;
+  overflow: auto; /* provides a scrollbar when content overflows */
+  border-left: 3px solid #ccc;
+  padding: 2em;
+  box-sizing: border-box;
+  min-height: 100px;
+}
+
+.trending-container h2,
+.users-to-follow-container h2 {
   margin-bottom: 1em;
   color: #333;
   font-weight: bold;
+}
+
+.users-to-follow-container a,
+.trending-container a {
+  display: block;
+  padding: 0.5em 0;
+  color: #4267b2;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }

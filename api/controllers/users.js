@@ -43,6 +43,24 @@ const UsersController = {
       });
     });
   },
+
+  GetAll: async (req, res) => {
+    try {
+      const users = await User.find({})
+        .populate("followers", "_id")
+        .select("username _id followers");
+
+      if (!users) {
+        return res.status(404).json({ message: "Users not found" });
+      }
+
+      res.status(200).json(users);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
+
   UpdateFollow: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);

@@ -19,6 +19,7 @@ import FollowerModal from "../followers/FollowerModal";
 import GroupPage from "../group/GroupPage";
 import GroupDetailsPage from "../group/GroupDetailsPage";
 import TrendingPosts from "../post/TrendingPost";
+import UsersToFollow from "../followers/UsersToFollow";
 
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
@@ -172,11 +173,18 @@ const App = () => {
             </Routes>
           </div>
         </div>
-        {isUserLoggedIn && (
-          <div className="trending-container">
-            <TrendingPosts token={token} />
-          </div>
-        )}
+        <div className="dashboard-container">
+          {isUserLoggedIn && (
+            <>
+              <div className="trending-container">
+                <TrendingPosts token={token} />
+              </div>
+              <div className="users-to-follow-container">
+                <UsersToFollow token={token} currentUserId={userId} />
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {showLoginForm && (
