@@ -151,6 +151,9 @@ const ProfilePage = ({ userId, onClose }) => {
                 key={post._id}
                 onUpdatedLikes={handleProfileDataChange}
                 showCommentForm={false}
+                GroupImage={post.groupId ? post.groupId.image : null}
+                group={post.groupId}
+                groupId={post.groupId ? post.groupId._id : null}
               />
             </div>
           ))}

@@ -11,7 +11,33 @@ const ProfileController = {
       } else {
         const { name, username, bio, followers, following, image } = user;
 
-        const posts = await Post.find({ authorId: user._id });
+        // Populate the 'groupId' field of the post
+        const posts = await Post.find({ authorId: user._id }).populate(
+          "groupId"
+        );
+
+        const postData = posts.map((post) => {
+          let groupImage = null;
+
+          // Ensure that the post has a group and that the group has an image before we start dealing with the image
+          if (post.groupId && post.groupId.image && post.groupId.image.data) {
+            const imageBuffer = Buffer.from(post.groupId.image.data.buffer);
+            const base64Image = imageBuffer.toString("base64");
+            groupImage = `data:${post.groupId.image.contentType};base64,${base64Image}`;
+
+            // Clone the post object and replace the groupId with a new object that contains an image field
+            return {
+              ...post.toObject(),
+              groupId: {
+                ...post.groupId.toObject(),
+                image: groupImage,
+              },
+            };
+          } else {
+            // If the post doesn't have a group or the group doesn't have an image, we return the post as it is
+            return post;
+          }
+        });
 
         const token = await TokenGenerator.jsonwebtoken(req.params.id);
 
@@ -22,9 +48,8 @@ const ProfileController = {
           followers,
           following,
           image,
-          posts,
+          posts: postData, // Changed to postData
           token,
-          posts,
         });
       }
     } catch (err) {
