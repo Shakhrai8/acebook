@@ -117,3 +117,66 @@ body {
   text-decoration: none; /* remove underline from links */
   font-size: 0.7em;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul.menu {
+  display: inline-block;
+  list-style-type: none;
+}
+
+li.menu_list {
+  height: 85px;
+  width: 85px;
+  position: relative;
+}
+
+li.menu_list .front,
+a.side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 86px;
+  width: 100%;
+  padding: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+}
+
+li.menu_list .front {
+  background-color: #4267b2;
+  color: #fff;
+  font-size: 0.6em; /* Adjusted font size */
+  font-weight: bold; /* Made the text bolder */
+  transform-origin: 0 0;
+}
+
+a.side {
+  background-color: #fff;
+  color: #4267b2;
+  font-size: 0.6em; /* Adjusted font size */
+  font-weight: bold; /* Made the text bolder */
+  transform-origin: 0 0 85px;
+  transform: rotateY(-90deg);
+}
+
+li.menu_list:hover a.side {
+  background-color: #365899;
+  color: #fff; /* Adjusted hover colour to match your scheme */
+  transform: rotateY(0deg);
+}
+
+li.menu_list:hover .front {
+  background-color: #365899;
+  color: #fff; /* Adjusted hover colour to match your scheme */
+  transform: rotateY(90deg);
+}
