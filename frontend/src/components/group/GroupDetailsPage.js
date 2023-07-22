@@ -145,20 +145,21 @@ const GroupDetailsPage = ({ searchTerm }) => {
         </div>
 
         <h3>Members</h3>
-        <div className="group-members">
-          {members.slice(0, 8).map((member) => (
-            <MemberCard key={member._id} member={member} />
-          ))}
-          {members.length > 8 && (
-            <div className="members-extra">+{members.length - 8} More</div>
-          )}
+        <div className="all-members-container">
+          <div className="group-members">
+            {members.slice(0, 8).map((member) => (
+              <MemberCard key={member._id} member={member} />
+            ))}
+            {members.length > 8 && (
+              <div className="members-extra">+{members.length - 8} More</div>
+            )}
+          </div>
+          <button onClick={handleToggleMembership}>
+            {members.find((member) => member._id === userId)
+              ? "Leave Group"
+              : "Join Group"}
+          </button>
         </div>
-        <button onClick={handleToggleMembership}>
-          {members.find((member) => member._id === userId)
-            ? "Leave Group"
-            : "Join Group"}
-        </button>
-
         <div className="create-post-container">
           <PostForm
             token={token}
@@ -186,6 +187,8 @@ const GroupDetailsPage = ({ searchTerm }) => {
                     handleUpdatedCommentLikes={handleUpdatedCommentLikes}
                     GroupImage={group.image}
                     group={group}
+                    groupId={group._id}
+                    postedAsGroup={false}
                   />
                 </div>
               ))}

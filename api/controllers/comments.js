@@ -54,6 +54,7 @@ const CommentsController = {
           type: "comment",
           commentId: comment._id,
           userId: post.authorId,
+          groupId: comment.groupId,
           originUserId: req.user_id,
           message: `New comment on your post by @${username}`,
         });

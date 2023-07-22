@@ -57,9 +57,13 @@ const NotificationModal = ({ onClose }) => {
       });
   };
 
-  const scrollToElement = (elementId) => {
+  const scrollToElement = (elementId, groupId) => {
     window.localStorage.setItem("scrollToId", elementId);
-    navigate("/");
+    if (groupId) {
+      navigate(`/groups/${groupId}`);
+    } else {
+      navigate("/");
+    }
     onClose();
   };
 
@@ -88,19 +92,24 @@ const NotificationModal = ({ onClose }) => {
                 buttonText = "View Mention";
                 actionOnClick = () => {
                   if (notification.postId) {
-                    scrollToElement(notification.postId);
+                    scrollToElement(notification.postId, notification.groupId);
                   } else if (notification.commentId) {
-                    scrollToElement(notification.commentId);
+                    scrollToElement(
+                      notification.commentId,
+                      notification.groupId
+                    );
                   }
                 };
                 break;
               case "comment":
                 buttonText = "View Comment";
-                actionOnClick = () => scrollToElement(notification.commentId);
+                actionOnClick = () =>
+                  scrollToElement(notification.commentId, notification.groupId);
                 break;
               default:
                 buttonText = "View Post";
-                actionOnClick = () => scrollToElement(notification.postId);
+                actionOnClick = () =>
+                  scrollToElement(notification.postId, notification.groupId);
             }
 
             return (

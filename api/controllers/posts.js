@@ -70,6 +70,7 @@ const PostsController = {
             type: "mention",
             postId: post._id,
             userId: mentionedUser._id,
+            groupId: post.groupId,
             originUserId: req.user_id,
             message: `You have been mentioned in a post by the user @${username}.`,
           });

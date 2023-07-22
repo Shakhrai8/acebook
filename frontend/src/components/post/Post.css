@@ -117,6 +117,7 @@
 }
 
 /* Wrapper for PostForm */
+.all-members-container,
 .create-post-container {
   display: flex;
   flex-direction: column;
@@ -131,12 +132,14 @@
 }
 
 .post-container:hover,
+.all-members-container:hover,
 .create-post-container:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .post-container:active,
+.all-members-container:active,
 .create-post-container:active {
   transform: translateY(1px);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);

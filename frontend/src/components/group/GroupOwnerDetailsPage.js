@@ -88,13 +88,15 @@ const GroupOwnerDetailsPage = ({
         <p onClick={() => setShowDescriptionModal(true)}>{group.description}</p>
       </div>
       <h3>Members</h3>
-      <div className="group-members">
-        {members.slice(0, 8).map((member) => (
-          <MemberCard key={member._id} member={member} />
-        ))}
-        {members.length > 8 && (
-          <div className="members-extra">+{members.length - 8} More</div>
-        )}
+      <div className="all-members-container">
+        <div className="group-members">
+          {members.slice(0, 8).map((member) => (
+            <MemberCard key={member._id} member={member} />
+          ))}
+          {members.length > 8 && (
+            <div className="members-extra">+{members.length - 8} More</div>
+          )}
+        </div>
       </div>
 
       <div className="create-post-container">
