@@ -134,6 +134,7 @@ const OtherUserProfilePage = () => {
                 token={localStorage.getItem("token")}
                 key={post._id}
                 onUpdatedLikes={handleProfileDataChange}
+                showCommentForm={false}
               />
             </div>
           ))}

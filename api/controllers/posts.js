@@ -16,6 +16,43 @@ const PostsController = {
     });
   },
 
+  Trending: async (req, res) => {
+    try {
+      const posts = await Post.find({})
+        .sort({ likes: -1 }) // Sort by likes in descending order
+        .populate("groupId") // Add this to populate the 'groupId' field
+        .limit(5); // Limit to top 5 posts, adjust as needed
+
+      const postData = posts.map((post) => {
+        let groupImage = null;
+
+        // Ensure that the post has a group and that the group has an image before we start dealing with the image
+        if (post.groupId && post.groupId.image && post.groupId.image.data) {
+          const imageBuffer = Buffer.from(post.groupId.image.data.buffer);
+          const base64Image = imageBuffer.toString("base64");
+          groupImage = `data:${post.groupId.image.contentType};base64,${base64Image}`;
+
+          // Clone the post object and replace the groupId with a new object that contains an image field
+          return {
+            ...post.toObject(),
+            groupId: {
+              ...post.groupId.toObject(),
+              image: groupImage,
+            },
+          };
+        } else {
+          // If the post doesn't have a group or the group doesn't have an image, we return the post as it is
+          return post;
+        }
+      });
+
+      res.status(200).json({ posts: postData });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
+
   Create: async (req, res) => {
     const timeCalc = () => {
       const now = new Date();

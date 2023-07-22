@@ -18,6 +18,7 @@ import OtherUserProfilePage from "../profile/OtherUserProfilePage";
 import FollowerModal from "../followers/FollowerModal";
 import GroupPage from "../group/GroupPage";
 import GroupDetailsPage from "../group/GroupDetailsPage";
+import TrendingPosts from "../post/TrendingPost";
 
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
@@ -43,13 +44,14 @@ const App = () => {
   const handleLogout = () => setShowLogoutForm(true);
   const handleFollowersModal = () => setShowFollowersModal(true);
 
+  const token = window.localStorage.getItem("token");
+
   const handleSuccessfulLogin = () => {
     setIsUserLoggedIn(true);
     // ...other stuff, like closing the modal
   };
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
       const decodedToken = jwt_decode(token);
       setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
@@ -170,6 +172,11 @@ const App = () => {
             </Routes>
           </div>
         </div>
+        {isUserLoggedIn && (
+          <div className="trending-container">
+            <TrendingPosts token={token} />
+          </div>
+        )}
       </div>
 
       {showLoginForm && (

@@ -15,7 +15,7 @@ const Navbar = ({
         <>
           <li className="menu_list" onClick={onLogin}>
             <span className="front">
-              <i class="fas fa-sign-in-alt"></i>
+              <i className="fas fa-sign-in-alt"></i>
             </span>
             <Link to="/" className="side">
               Login
@@ -23,7 +23,7 @@ const Navbar = ({
           </li>
           <li className="menu_list" onClick={onSignup}>
             <span className="front">
-              <i class="fas fa-user-plus"></i>
+              <i className="fas fa-user-plus"></i>
             </span>
             <Link to="/" className="side">
               Sign Up
@@ -34,7 +34,7 @@ const Navbar = ({
         <>
           <li className="menu_list" onClick={onNotifications}>
             <span className="front">
-              <i class="fas fa-bell"></i>
+              <i className="fas fa-bell"></i>
             </span>
             <Link to="/" className="side">
               Notifications
@@ -42,7 +42,7 @@ const Navbar = ({
           </li>
           <li className="menu_list" onClick={onFollowersModal}>
             <span className="front">
-              <i class="fas fa-users"></i>
+              <i className="fas fa-users"></i>
             </span>
             <Link to="/" className="side">
               Followers
@@ -50,7 +50,7 @@ const Navbar = ({
           </li>
           <li className="menu_list">
             <span className="front">
-              <i class="fas fa-users-cog"></i>
+              <i className="fas fa-users-cog"></i>
             </span>
             <Link to="/groups" className="side">
               Groups
@@ -58,7 +58,7 @@ const Navbar = ({
           </li>
           <li className="menu_list" onClick={onLogout}>
             <span className="front">
-              <i class="fas fa-sign-out-alt"></i>
+              <i className="fas fa-sign-out-alt"></i>
             </span>
             <Link to="/" className="side">
               Logout

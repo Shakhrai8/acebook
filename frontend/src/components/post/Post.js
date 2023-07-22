@@ -16,6 +16,7 @@ const Post = ({
   group,
   groupId,
   postedAsGroup,
+  showCommentForm = true,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -119,6 +120,38 @@ const Post = ({
       </div>
       <div className="post-content" id={post._id}>
         <div className="message">{post.message}</div>
+
+        {imgSrc && (
+          <div
+            className={`post-container ${isZoomed ? "zoom-active" : ""}`}
+            data-cy="post"
+            key={post._id}
+          >
+            <div className="post-image-container">
+              <img
+                className="post-image"
+                src={imgSrc}
+                alt="Post"
+                onClick={handleZoom}
+              />
+
+              <Modal open={isZoomed} onClose={onClose}>
+                <div className="modal-content">
+                  <button className="close-button" onClick={onClose}>
+                    X
+                  </button>
+                  <div className="image-zoom">
+                    <img
+                      className="zoomed-image"
+                      src={imgSrc}
+                      alt="Zoomed Post"
+                    />
+                  </div>
+                </div>
+              </Modal>
+            </div>
+          </div>
+        )}
         <div className="interactive-area">
           <button
             id="post-likes"
@@ -136,64 +169,37 @@ const Post = ({
             </span>
           </button>
         </div>
-      </div>
 
-      <div
-        className={`post-container ${isZoomed ? "zoom-active" : ""}`}
-        data-cy="post"
-        key={post._id}
-      >
-        {imgSrc && (
-          <div className="post-image-container">
-            <img
-              className="post-image"
-              src={imgSrc}
-              alt="Post"
-              onClick={handleZoom}
+        {showCommentForm && (
+          <>
+            <CommentForm
+              token={token}
+              onNewComment={handleNewComment}
+              postId={post._id}
+              groupId={groupId}
+              postedAsGroup={postedAsGroup}
             />
 
-            <Modal open={isZoomed} onClose={onClose}>
-              <div className="modal-content">
-                <button className="close-button" onClick={onClose}>
-                  X
-                </button>
-                <div className="image-zoom">
-                  <img
-                    className="zoomed-image"
-                    src={imgSrc}
-                    alt="Zoomed Post"
-                  />
-                </div>
-              </div>
-            </Modal>
-          </div>
+            <div id="comment-feed">
+              {comments &&
+                comments
+                  .filter((comment) => comment.postId === post._id)
+                  .map((comment) => (
+                    <div key={comment._id}>
+                      <Comment
+                        comment={comment}
+                        onNewComment={handleNewComment}
+                        token={token}
+                        handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                        group={group}
+                        groupId={groupId}
+                        postedAsGroup={postedAsGroup}
+                      />
+                    </div>
+                  ))}
+            </div>
+          </>
         )}
-        <CommentForm
-          token={token}
-          onNewComment={handleNewComment}
-          postId={post._id}
-          groupId={groupId}
-          postedAsGroup={postedAsGroup}
-        />
-
-        <div id="comment-feed">
-          {comments &&
-            comments
-              .filter((comment) => comment.postId === post._id)
-              .map((comment) => (
-                <div key={comment._id}>
-                  <Comment
-                    comment={comment}
-                    onNewComment={handleNewComment}
-                    token={token}
-                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                    group={group}
-                    groupId={groupId}
-                    postedAsGroup={postedAsGroup}
-                  />
-                </div>
-              ))}
-        </div>
       </div>
     </div>
   );

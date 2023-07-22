@@ -9,5 +9,6 @@ router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create);
 router.get("/image/:postId", PostsController.GetImage);
 router.put("/:postId/like", PostsController.UpdateLikes);
+router.get("/trending", PostsController.Trending);
 
 module.exports = router;
