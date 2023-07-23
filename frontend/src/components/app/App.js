@@ -13,7 +13,7 @@ import Feed from "../feed/Feed";
 import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
-import ProfileButton from "../profile/ProfileButton";
+
 import OtherUserProfilePage from "../profile/OtherUserProfilePage";
 import FollowerModal from "../followers/FollowerModal";
 import GroupPage from "../group/GroupPage";
@@ -22,7 +22,7 @@ import TrendingPosts from "../post/TrendingPost";
 import UsersToFollow from "../followers/UsersToFollow";
 
 import Profile from "../profile/ProfilePage";
-import FeedButton from "../feed/FeedButton";
+
 import jwt_decode from "jwt-decode";
 
 import "./App.css";
@@ -89,19 +89,12 @@ const App = () => {
         <div className="content">
           <div className="top-bar">
             <div className="top-right">
-              {isUserLoggedIn ? (
-                <>
-                  <button
-                    className="navbar-button-top"
-                    id="notification-button"
-                    onClick={handleNotifications}
-                  >
-                    🔔
-                  </button>
-                </>
-              ) : null}
-              <FeedButton />
-              <ProfileButton userId={userId} />
+              <Link to="/" className="feed-button-link">
+                <button className="feed-button">Back to Feed</button>
+              </Link>
+              <Link to={`/profiles/${userId}`} className="profile-button-link">
+                <button className="profile-button">Profile</button>
+              </Link>
             </div>
           </div>
 

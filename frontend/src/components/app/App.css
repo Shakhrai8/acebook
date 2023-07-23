@@ -6,6 +6,10 @@ body {
   height: 100vh; /* Full height */
 }
 
+#feed {
+  margin-top: 20px;
+}
+
 .app-container {
   height: 100%;
   display: flex;
@@ -212,4 +216,55 @@ li.menu_list:hover .front {
   color: #4267b2;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+.top-right {
+  display: flex;
+  gap: 20px; /* Spacing between the buttons */
+  justify-content: flex-end;
+}
+
+.feed-button-link,
+.profile-button-link {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex; /* Make the links flex containers */
+  position: relative; /* Relative positioning to position the underline */
+}
+
+.feed-button,
+.profile-button {
+  font-size: 0.7em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.feed-button-link:hover,
+.profile-button-link:hover {
+  color: #fddb3a;
+}
+
+.feed-button-link::after,
+.profile-button-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fddb3a;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.feed-button-link:hover::after,
+.profile-button-link:hover::after {
+  transform: scaleX(1);
 }
