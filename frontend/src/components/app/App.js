@@ -20,7 +20,7 @@ import GroupPage from "../group/GroupPage";
 import GroupDetailsPage from "../group/GroupDetailsPage";
 import TrendingPosts from "../post/TrendingPost";
 import UsersToFollow from "../followers/UsersToFollow";
-
+import AnimationComponent from "../common/AnimationComponent";
 import Profile from "../profile/ProfilePage";
 
 import jwt_decode from "jwt-decode";
@@ -77,14 +77,17 @@ const App = () => {
       </div>
 
       <div className="main-content">
-        <Navbar
-          onLogin={handleLogin}
-          onSignup={handleSignup}
-          onNotifications={handleNotifications}
-          onLogout={handleLogout}
-          isUserLoggedIn={isUserLoggedIn}
-          onFollowersModal={handleFollowersModal}
-        />
+        <div className="navbar-container">
+          <Navbar
+            onLogin={handleLogin}
+            onSignup={handleSignup}
+            onNotifications={handleNotifications}
+            onLogout={handleLogout}
+            isUserLoggedIn={isUserLoggedIn}
+            onFollowersModal={handleFollowersModal}
+          />
+          <AnimationComponent />
+        </div>
 
         <div className="content">
           <div className="top-bar">
