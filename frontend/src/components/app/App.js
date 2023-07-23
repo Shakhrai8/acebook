@@ -148,7 +148,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/groups"
+                path="/groups/*"
                 element={
                   isUserLoggedIn ? (
                     <GroupPage />
@@ -158,7 +158,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/groups/:id"
+                path="/groups/:id/*"
                 element={
                   isUserLoggedIn ? (
                     <GroupDetailsPage searchTerm={searchTerm} />
