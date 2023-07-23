@@ -133,46 +133,52 @@
 
 /* Group Form styles */
 
-.modal-content {
-  padding: 20px;
-  position: relative;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-}
-
-.modal-content form {
+/* Form */
+.group-form {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
-.modal-content form label {
-  font-size: 18px;
-  margin-bottom: 10px;
+.form-label {
+  font-size: 1rem;
+  color: #333;
 }
 
-.modal-content form input,
-.modal-content form textarea {
-  padding: 10px;
-  border-radius: 5px;
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.5em;
   border: 1px solid #ddd;
-  font-size: 16px;
-  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.modal-content form button {
-  font-size: 18px;
-  background-color: #4267b2;
-  color: #ffffff;
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #4267b2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(66, 103, 178, 0.5);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-button {
+  font-size: 1rem;
+  padding: 0.5em;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 5px;
+  background-color: #4267b2;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.modal-content form button:hover {
-  background-color: #0056b3;
-  box-shadow: 0px 12px 20px -10px rgba(0, 86, 179, 0.6);
+.form-button:hover {
+  background-color: #345280;
 }
 
 /* MemberCard.css */

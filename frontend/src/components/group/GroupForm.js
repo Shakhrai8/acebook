@@ -31,25 +31,32 @@ const GroupForm = ({ onClose }) => {
 
   return (
     <div className="modal-content">
-      <form onSubmit={handleSubmit}>
-        <label>
+      <button className="close-button" onClick={onClose}>
+        X
+      </button>
+      <form onSubmit={handleSubmit} className="group-form">
+        <label className="form-label">
           Name:
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="form-input"
           />
         </label>
-        <label>
+        <label className="form-label">
           Description:
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className="form-textarea"
           />
         </label>
-        <button type="submit">Create Group</button>
+        <button type="submit" className="form-button">
+          Create Group
+        </button>
       </form>
     </div>
   );
