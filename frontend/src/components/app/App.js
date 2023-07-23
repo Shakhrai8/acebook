@@ -13,6 +13,7 @@ import Feed from "../feed/Feed";
 import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
+import TopGroups from "../group/TopGroups";
 
 import OtherUserProfilePage from "../profile/OtherUserProfilePage";
 import FollowerModal from "../followers/FollowerModal";
@@ -177,6 +178,9 @@ const App = () => {
               </div>
               <div className="users-to-follow-container">
                 <UsersToFollow token={token} currentUserId={userId} />
+              </div>
+              <div className="top-groups-container">
+                <TopGroups />
               </div>
             </>
           )}

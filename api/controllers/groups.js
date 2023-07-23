@@ -204,6 +204,38 @@ const GroupsController = {
       res.status(500).json({ error: err.toString() });
     }
   },
+
+  GetTopGroups: async (req, res) => {
+    try {
+      const groups = await Group.find({})
+        .sort({ "members.length": -1 })
+        .limit(3);
+
+      const groupData = groups.map((group) => {
+        let imageData = null;
+        if (group.image && group.image.data) {
+          const imageBuffer = Buffer.from(group.image.data.buffer);
+          const base64Image = imageBuffer.toString("base64");
+          imageData = `data:${group.image.contentType};base64,${base64Image}`;
+        }
+        return {
+          _id: group._id,
+          name: group.name,
+          description: group.description,
+          creator: group.creator,
+          members: group.members,
+          posts: group.posts,
+          image: imageData,
+          createdAt: group.createdAt,
+        };
+      });
+
+      res.status(200).json(groupData);
+    } catch (err) {
+      console.error("Error in GetTopGroups: ", err);
+      res.status(500).json({ error: err.toString() });
+    }
+  },
 };
 
 module.exports = GroupsController;

@@ -191,6 +191,7 @@ li.menu_list:hover .front {
   padding: 2em;
 }
 
+.top-groups-container,
 .users-to-follow-container,
 .trending-container {
   flex-basis: 100%; /* this may not be necessary anymore, you can remove if not required */
@@ -202,6 +203,7 @@ li.menu_list:hover .front {
   min-height: 100px;
 }
 
+.top-groups-container h2,
 .trending-container h2,
 .users-to-follow-container h2 {
   margin-bottom: 1em;

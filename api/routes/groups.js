@@ -10,6 +10,7 @@ const PostsController = require("../controllers/posts");
 // Define routes for groups
 router.post("/create", GroupController.Create);
 router.get("/all", GroupController.GetAllGroups);
+router.get("/top", GroupController.GetTopGroups);
 router.get("/:id", GroupController.GetGroup);
 router.patch("/:id/addMember", GroupController.AddMember);
 router.patch(
