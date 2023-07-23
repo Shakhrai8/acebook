@@ -129,19 +129,21 @@ const GroupDetailsPage = ({ searchTerm }) => {
     return (
       <div className="group-details">
         <div className="group-header">
-          <h2>{group.name}</h2>
+          <div className="group-header-top">
+            <h2 className="group-name">{group.name}</h2>
+          </div>
           {group.image && (
             <img className="group-image" src={group.image} alt={group.name} />
           )}
 
-          <p>
-            Created by:{" "}
+          <div className="group-creator">
+            Created by{" "}
             <Link to={`/users/${creator._id}`} className="link">
               @{creator.username}
             </Link>
-          </p>
+          </div>
 
-          <p>{group.description}</p>
+          <p className="group-description"> {group.description}</p>
         </div>
 
         <h3>Members</h3>
@@ -154,7 +156,10 @@ const GroupDetailsPage = ({ searchTerm }) => {
               <div className="members-extra">+{members.length - 8} More</div>
             )}
           </div>
-          <button onClick={handleToggleMembership}>
+          <button
+            className="membership-button"
+            onClick={handleToggleMembership}
+          >
             {members.find((member) => member._id === userId)
               ? "Leave Group"
               : "Join Group"}

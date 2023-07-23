@@ -38,7 +38,9 @@ const ImageUploadForm = ({ groupId, refetchGroup, onClose }) => {
         <button className="close-button" onClick={onClose}>
           X
         </button>
-        <p>Choose a new group picture:</p>
+        <p className="choose-container-description">
+          Choose a new group picture:
+        </p>
         <form className="group-image-form" onSubmit={handleSubmit}>
           <input
             type="file"
