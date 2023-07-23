@@ -36,10 +36,15 @@ const UsersToFollow = ({ token, currentUserId }) => {
         <p>No more people to follow!</p>
       ) : (
         users.slice(currentIndex, currentIndex + 5).map((user) => (
-          <div key={user._id}>
-            <Link to={`/users/${user._id}`} className={"username"}>
-              @{user.username}
-            </Link>
+          <div className="user-recomendation-box" key={user._id}>
+            <div className="author">
+              <img className="author-image" src={user.image} alt="Author" />
+            </div>
+            <div className="username-section">
+              <Link to={`/users/${user._id}`} className={"username"}>
+                @{user.username}
+              </Link>
+            </div>
           </div>
         ))
       )}

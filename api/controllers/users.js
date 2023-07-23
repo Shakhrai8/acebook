@@ -48,13 +48,30 @@ const UsersController = {
     try {
       const users = await User.find({})
         .populate("followers", "_id")
-        .select("username _id followers");
+        .select("username _id followers image");
 
       if (!users) {
         return res.status(404).json({ message: "Users not found" });
       }
 
-      res.status(200).json(users);
+      const usersData = users.map((user) => {
+        let userImage = null;
+
+        if (user.image && user.image.data) {
+          const imageBuffer = Buffer.from(user.image.data.buffer);
+          const base64Image = imageBuffer.toString("base64");
+          userImage = `data:${user.image.contentType};base64,${base64Image}`;
+
+          return {
+            ...user.toObject(),
+            image: userImage,
+          };
+        } else {
+          return user;
+        }
+      });
+
+      res.status(200).json(usersData);
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.toString() });

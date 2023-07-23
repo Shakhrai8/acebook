@@ -218,6 +218,24 @@ li.menu_list:hover .front {
   transition: color 0.2s ease-in-out;
 }
 
+.user-recomendation-box {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust as needed */
+  margin-bottom: 1.5em; /* Adds space below each user */
+}
+
+.author-image {
+  border-radius: 50%;
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+}
+
+.username {
+  flex-grow: 1;
+  text-align: left; /* Align the text to the left */
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 .top-right {
@@ -248,7 +266,7 @@ li.menu_list:hover .front {
 
 .feed-button-link:hover,
 .profile-button-link:hover {
-  color: #fddb3a;
+  color: #4267b2;
 }
 
 .feed-button-link::after,
@@ -259,7 +277,7 @@ li.menu_list:hover .front {
   left: 0;
   width: 100%;
   height: 2px;
-  background: #fddb3a;
+  background: #4267b2;
   transform: scaleX(0);
   transition: transform 0.3s ease-in-out;
 }
