@@ -1,12 +1,12 @@
 describe("Page Redirect", () => {
   it("redirects user to their profile page after clicking the profile button", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
     cy.get("#submit").click();
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
@@ -16,12 +16,12 @@ describe("Page Redirect", () => {
 
   it("redirects user to their feed after clicking the Acebook button", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
     cy.get("#submit").click();
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
@@ -32,12 +32,12 @@ describe("Page Redirect", () => {
 
   it("redirects user to their feed after clicking the Back to Feed button", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
     cy.get("#submit").click();
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();

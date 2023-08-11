@@ -3,12 +3,12 @@ import "cypress-file-upload";
 describe("Change Profile Picture", () => {
   it("login and make an image post", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
     cy.get("#submit").click();
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();

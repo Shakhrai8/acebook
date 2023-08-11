@@ -1,7 +1,7 @@
 describe("Signing up", () => {
   it("with valid credentials, redirects to '/login'", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
@@ -12,7 +12,7 @@ describe("Signing up", () => {
 
   it("with missing password, submit button remains visible", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
 
@@ -21,7 +21,7 @@ describe("Signing up", () => {
 
   it("with missing email, submit button remains visible'", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#password").type("password");
     cy.get("#submit").click();
 

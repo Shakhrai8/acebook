@@ -1,12 +1,12 @@
 describe("Signing in", () => {
   it("with valid credentials, shows posts", () => {
     cy.visit("/");
-    cy.contains("Sign Up").click();
+    cy.get(".fas.fa-user-plus").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#username").type("username");
     cy.get("#submit").click();
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
@@ -15,7 +15,7 @@ describe("Signing in", () => {
 
   it("with missing password, redirects to '/login'", () => {
     cy.visit("/");
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
     cy.get("#submit").should("be.visible");
@@ -23,7 +23,7 @@ describe("Signing in", () => {
 
   it("with missing email, redirects to '/login'", () => {
     cy.visit("/");
-    cy.contains("Log In").click();
+    cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#password").type("password");
     cy.get("#submit").click();
 

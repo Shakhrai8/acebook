@@ -67,7 +67,7 @@ We use Jest for backend testing and Cypress for frontend end-to-end testing.
 - To run frontend tests:
 
   ```bash
-  cd frontend && npx run test:feature
+  cd frontend && npx run cypress run
   ```
 
 ## Built With
