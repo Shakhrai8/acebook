@@ -11,13 +11,13 @@ describe("/users", () => {
   describe("POST, when email and password are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
-        .post("/users")
+        .post("/user")
         .send({ email: "poppy@email.com", password: "1234", username: "test" });
       expect(response.statusCode).toBe(201);
     });
 
     test("a user is created", async () => {
-      await request(app).post("/users").send({
+      await request(app).post("/user").send({
         email: "scarlett@email.com",
         password: "1234",
         username: "test",
@@ -28,7 +28,7 @@ describe("/users", () => {
     });
 
     test("a user is created with an image", async () => {
-      await request(app).post("/users").send({
+      await request(app).post("/user").send({
         email: "scarlett@email.com",
         password: "1234",
         username: "test",
@@ -46,13 +46,13 @@ describe("/users", () => {
   describe("POST, when password is missing", () => {
     test("response code is 400", async () => {
       let response = await request(app)
-        .post("/users")
+        .post("/user")
         .send({ email: "skye@email.com" });
       expect(response.statusCode).toBe(500);
     });
 
     test("does not create a user", async () => {
-      await request(app).post("/users").send({ email: "skye@email.com" });
+      await request(app).post("/user").send({ email: "skye@email.com" });
       let users = await User.find();
       expect(users.length).toEqual(0);
     });
@@ -61,13 +61,13 @@ describe("/users", () => {
   describe("POST, when email is missing", () => {
     test("response code is 400", async () => {
       let response = await request(app)
-        .post("/users")
+        .post("/user")
         .send({ password: "1234" });
       expect(response.statusCode).toBe(400);
     });
 
     test("does not create a user", async () => {
-      await request(app).post("/users").send({ password: "1234" });
+      await request(app).post("/user").send({ password: "1234" });
       let users = await User.find();
       expect(users.length).toEqual(0);
     });

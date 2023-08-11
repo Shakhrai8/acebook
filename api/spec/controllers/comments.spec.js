@@ -4,6 +4,7 @@ require("../mongodb_helper");
 const mongoose = require("mongoose");
 const Comment = require("../../models/comment");
 const User = require("../../models/user");
+const Post = require("../../models/post");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
@@ -17,6 +18,13 @@ describe("/comments", () => {
       username: "test",
     });
     await user.save();
+
+    post = new Post({
+      username: user.username,
+      message: "This is a test post",
+      authorId: user._id,
+    });
+    await post.save();
 
     token = JWT.sign(
       {
@@ -42,7 +50,7 @@ describe("/comments", () => {
       let response = await request(app)
         .post("/comments")
         .set("Authorization", `Bearer ${token}`)
-        .send({ comment: "hello world", token: token });
+        .send({ comment: "hello world", token: token, postId: post._id });
       expect(response.status).toEqual(201);
     });
 
@@ -50,7 +58,7 @@ describe("/comments", () => {
       await request(app)
         .post("/comments")
         .set("Authorization", `Bearer ${token}`)
-        .send({ comment: "hello world", token: token });
+        .send({ comment: "hello world", token: token, postId: post._id });
       let comments = await Comment.find();
       expect(comments.length).toEqual(1);
       expect(comments[0].comment).toEqual("hello world");
@@ -60,7 +68,7 @@ describe("/comments", () => {
       let response = await request(app)
         .post("/comments")
         .set("Authorization", `Bearer ${token}`)
-        .send({ comment: "hello world", token: token });
+        .send({ comment: "hello world", token: token, postId: post._id });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
@@ -71,14 +79,14 @@ describe("/comments", () => {
     test("responds with a 401", async () => {
       let response = await request(app)
         .post("/comments")
-        .send({ comment: "hello again world" });
+        .send({ comment: "hello again world", postId: post._id });
       expect(response.status).toEqual(401);
     });
 
     test("a comment is not created", async () => {
       await request(app)
         .post("/comments")
-        .send({ comment: "hello again world" });
+        .send({ comment: "hello again world", postId: post._id });
       let comments = await Comment.find();
       expect(comments.length).toEqual(0);
     });
@@ -86,15 +94,15 @@ describe("/comments", () => {
     test("a token is not returned", async () => {
       let response = await request(app)
         .post("/comments")
-        .send({ comment: "hello again world" });
+        .send({ comment: "hello again world", postId: post._id });
       expect(response.body.token).toEqual(undefined);
     });
   });
 
   describe("GET, when token is present", () => {
     test("returns every comment in the collection", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app)
@@ -106,8 +114,8 @@ describe("/comments", () => {
     });
 
     test("the response code is 200", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app)
@@ -118,8 +126,8 @@ describe("/comments", () => {
     });
 
     test("returns a new token", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app)
@@ -134,8 +142,8 @@ describe("/comments", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no comments", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app).get("/comments");
@@ -143,8 +151,8 @@ describe("/comments", () => {
     });
 
     test("the response code is 401", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app).get("/comments");
@@ -152,8 +160,8 @@ describe("/comments", () => {
     });
 
     test("does not return a new token", async () => {
-      let comment1 = new Comment({ comment: "howdy!" });
-      let comment2 = new Comment({ comment: "hola!" });
+      let comment1 = new Comment({ comment: "howdy!", postId: post._id });
+      let comment2 = new Comment({ comment: "hola!", postId: post._id });
       await comment1.save();
       await comment2.save();
       let response = await request(app).get("/comments");
@@ -175,11 +183,19 @@ describe("PUT /posts/:postId/like", () => {
     });
     await user.save();
 
+    post = new Post({
+      username: user.username,
+      message: "This is a test post",
+      authorId: user._id,
+    });
+    await post.save();
+
     comment = new Comment({
       username: "test",
       time: "2023-07-14T11:30:00",
       comment: "hello world",
       authorId: user._id,
+      postId: post._id,
     });
     await comment.save();
 
