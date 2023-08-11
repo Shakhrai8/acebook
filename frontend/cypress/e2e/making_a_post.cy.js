@@ -1,4 +1,4 @@
-import 'cypress-file-upload';
+import "cypress-file-upload";
 
 describe("Making a post", () => {
   it("login and make a post", () => {
@@ -12,7 +12,7 @@ describe("Making a post", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.get(".create-post-container").type("This is a test post");
+    cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
     cy.contains("This is a test post").should("be.visible");
   });
@@ -28,10 +28,9 @@ describe("Making a post", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-  
-    cy.get("input[type='file']").attachFile("../fixtures/VOID");
+
+    cy.get(".post-form-file").attachFile("../fixtures/VOID");
     cy.get("#post-submit").click();
     cy.get(".post-image").should("be.visible");
   });
-  
 });

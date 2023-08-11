@@ -10,7 +10,7 @@ describe("Signing Out", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.contains("Logout").click();
+    cy.get(".fas.fa-sign-out-alt").click();
     cy.contains("Yes").click();
     cy.get("#login-placeholder").should("be.visible");
   });

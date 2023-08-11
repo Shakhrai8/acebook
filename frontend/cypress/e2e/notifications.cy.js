@@ -10,9 +10,9 @@ describe("getting a notification", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.get(".create-post-container").type("@username");
+    cy.get(".post-form-input").type("@username");
     cy.get("#post-submit").click();
-    cy.get("#notification-button").click();
+    cy.get(".fas.fa-bell").click();
     cy.contains(
       "You have been mentioned in a post by the user @username"
     ).should("be.visible");

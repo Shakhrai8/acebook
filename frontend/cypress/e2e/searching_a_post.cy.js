@@ -10,9 +10,9 @@ describe("Searching a post", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.get(".create-post-container").type("This is a test post");
+    cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
-    cy.get(".create-post-container").type("Search Item");
+    cy.get(".post-form-input").type("Search Item");
     cy.get("#post-submit").click();
     cy.get(".search-bar").type("Search Item");
     cy.contains("Search Item").should("exist");
