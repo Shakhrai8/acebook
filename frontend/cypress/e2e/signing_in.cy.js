@@ -2,19 +2,13 @@ describe("Signing in", () => {
   beforeEach(() => {
     cy.tests_cleanup();
   });
-  
+
   it("with valid credentials, shows posts", () => {
-    cy.visit("/");
-    cy.get(".fas.fa-user-plus").click();
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#username").type("username");
-    cy.get("#submit").click();
-    cy.get(".fas.fa-sign-in-alt").click();
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
+    cy.signup("someone@example.com", "password", "username");
+    cy.login("someone@example.com", "password");
     cy.get(".create-post-container").should("be.visible");
+    cy.get(".fas.fa-sign-out-alt").click();
+    cy.contains("Yes").click();
   });
 
   it("with missing password, redirects to '/login'", () => {
@@ -22,6 +16,7 @@ describe("Signing in", () => {
     cy.get(".fas.fa-sign-in-alt").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
+
     cy.get("#submit").should("be.visible");
   });
 

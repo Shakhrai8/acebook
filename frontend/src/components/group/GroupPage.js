@@ -21,6 +21,7 @@ const GroupPage = () => {
       .then((res) => res.json())
       .then((data) => {
         setGroups(data);
+        console.log(groups);
       })
       .catch((error) => console.error(error));
   }, []);

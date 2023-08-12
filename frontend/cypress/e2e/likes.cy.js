@@ -1,19 +1,11 @@
 describe("Liking and Unliking Posts and Comments", () => {
   beforeEach(() => {
     cy.tests_cleanup();
+    cy.signup("someone@example.com", "password", "username");
+    cy.login("someone@example.com", "password");
   });
-  
+
   it("likes a post", () => {
-    cy.visit("/");
-    cy.get(".fas.fa-user-plus").click();
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#username").type("username");
-    cy.get("#submit").click();
-    cy.get(".fas.fa-sign-in-alt").click();
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
     cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
     cy.get("#post-likes").click();
@@ -21,16 +13,6 @@ describe("Liking and Unliking Posts and Comments", () => {
   });
 
   it("unlikes a post", () => {
-    cy.visit("/");
-    cy.get(".fas.fa-user-plus").click();
-    cy.get("#email").type("someone1@example.com");
-    cy.get("#password").type("password");
-    cy.get("#username").type("username1");
-    cy.get("#submit").click();
-    cy.get(".fas.fa-sign-in-alt").click();
-    cy.get("#email").type("someone1@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
     cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
     cy.get("#post-likes").click();
@@ -39,16 +21,6 @@ describe("Liking and Unliking Posts and Comments", () => {
   });
 
   it("likes a comment", () => {
-    cy.visit("/");
-    cy.get(".fas.fa-user-plus").click();
-    cy.get("#email").type("someone2@example.com");
-    cy.get("#password").type("password");
-    cy.get("#username").type("username2");
-    cy.get("#submit").click();
-    cy.get(".fas.fa-sign-in-alt").click();
-    cy.get("#email").type("someone2@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
     cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
 
@@ -60,16 +32,6 @@ describe("Liking and Unliking Posts and Comments", () => {
   });
 
   it("unlikes a comment", () => {
-    cy.visit("/");
-    cy.get(".fas.fa-user-plus").click();
-    cy.get("#email").type("someone3@example.com");
-    cy.get("#password").type("password");
-    cy.get("#username").type("username3");
-    cy.get("#submit").click();
-    cy.get(".fas.fa-sign-in-alt").click();
-    cy.get("#email").type("someone3@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
     cy.get(".post-form-input").type("This is a test post");
     cy.get("#post-submit").click();
 
