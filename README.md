@@ -1,8 +1,10 @@
 # ACEBOOK - Social Media Application
 
-ACEBOOK is a comprehensive social media application where users can create posts, like and comment on posts, manage their profile, and receive notifications. 
+ACEBOOK is a comprehensive social media application where users can create posts, like and comment on posts, manage their profile, and receive notifications.
 
 The application is built with a React.js frontend, and an Express.js backend with a set of REST APIs.
+
+![Main Page](./public/images/acebook_main_page.gif)
 
 ## Features
 
@@ -12,6 +14,9 @@ The application is built with a React.js frontend, and an Express.js backend wit
 - Comments: Users can comment on posts and like comments.
 - Notifications: Users receive notifications for various activities related to their posts and interactions with other users.
 - Search: Users can search posts based on keywords.
+
+![Page with a list of groups](./public/images/All_groups.png)
+![Groups details Page](./public/images/One_group.png)
 
 ## Getting Started
 
@@ -54,6 +59,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 The application will start on `localhost:3000` (React app) and `localhost:5000` (Express app).
 
+![Profile Page](./public/images/Profile_page.png)
+
 ## Running the tests
 
 We use Jest for backend testing and Cypress for frontend end-to-end testing.
@@ -79,3 +86,5 @@ We use Jest for backend testing and Cypress for frontend end-to-end testing.
 - [Jest](https://jestjs.io/) - Used for backend testing
 - [Cypress](https://www.cypress.io/) - Used for end-to-end testing
 
+![Notifications Modal](./public/images/Notifications_modal.png)
+![Followers Modal](./public/images/Followers_modal.png)
