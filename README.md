@@ -127,5 +127,5 @@ Contributions to ACEBOOK are welcome! If you have any suggestions, bug reports, 
 
 ## License
 
-ACEBOOK is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
+ACEBOOK is licensed under the APACHE License. See [LICENSE](LICENSE) for more information.
 
