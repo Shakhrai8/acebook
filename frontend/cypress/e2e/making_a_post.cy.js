@@ -1,6 +1,10 @@
 import "cypress-file-upload";
 
 describe("Making a post", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+
   it("login and make a post", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

@@ -29,7 +29,9 @@ const GroupPage = () => {
     <div className="groups-content">
       <div className="header-banner">
         <h2>All Groups</h2>
-        <button onClick={handleModal}>Create Group</button>
+        <button className="create-grp-btn" onClick={handleModal}>
+          Create Group
+        </button>
       </div>
       {groups.length > 0 ? (
         <div className="group-grid">

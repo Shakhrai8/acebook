@@ -1,4 +1,8 @@
 describe("Edit Profile Info", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("Changes the user's name and bio", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

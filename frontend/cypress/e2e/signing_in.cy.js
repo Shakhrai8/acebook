@@ -1,4 +1,8 @@
 describe("Signing in", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("with valid credentials, shows posts", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

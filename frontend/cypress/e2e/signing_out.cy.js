@@ -1,4 +1,8 @@
 describe("Signing Out", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("clicking on the log out button takes you to the /", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

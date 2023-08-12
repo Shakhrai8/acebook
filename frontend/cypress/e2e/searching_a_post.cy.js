@@ -1,4 +1,8 @@
 describe("Searching a post", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("with valid credentials, creates two posts and searching a keyword in a post displays one", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

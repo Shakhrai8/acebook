@@ -1,4 +1,8 @@
 describe("Making a comment", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("logs in, creates a post and creates a comment", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

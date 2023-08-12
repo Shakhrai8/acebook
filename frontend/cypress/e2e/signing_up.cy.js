@@ -1,4 +1,8 @@
 describe("Signing up", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("with valid credentials, redirects to '/login'", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

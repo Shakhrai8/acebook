@@ -1,4 +1,8 @@
 describe("getting a notification", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("shows lastest notification", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

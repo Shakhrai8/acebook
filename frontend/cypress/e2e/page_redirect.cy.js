@@ -1,4 +1,8 @@
 describe("Page Redirect", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("redirects user to their profile page after clicking the profile button", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();

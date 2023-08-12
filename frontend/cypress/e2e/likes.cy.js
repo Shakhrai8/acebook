@@ -1,4 +1,8 @@
 describe("Liking and Unliking Posts and Comments", () => {
+  beforeEach(() => {
+    cy.tests_cleanup();
+  });
+  
   it("likes a post", () => {
     cy.visit("/");
     cy.get(".fas.fa-user-plus").click();
