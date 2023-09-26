@@ -115,8 +115,6 @@ const PostsController = {
           await notification.save();
         }
       }
-      console.log(req.body);
-      console.log(req.body);
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
     } catch (err) {

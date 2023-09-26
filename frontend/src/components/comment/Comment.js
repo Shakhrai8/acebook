@@ -16,7 +16,6 @@ const Comment = ({
 
   const handleCommentLike = async () => {
     setLiked(!liked);
-    console.log("handleLike is triggered");
     const response = await fetch(`/comments/${comment._id}/like`, {
       method: "PUT",
       headers: {

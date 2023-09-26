@@ -35,7 +35,6 @@ const Post = ({
 
   const handlePostLike = async () => {
     setLiked(!liked);
-    console.log("handleLike is triggered");
     const response = await fetch(`/posts/${post._id}/like`, {
       method: "PUT",
       headers: {

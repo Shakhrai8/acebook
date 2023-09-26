@@ -16,8 +16,6 @@ const Feed = ({ navigate, searchTerm, isUserLoggedIn }) => {
           },
         });
         const data = await response.json();
-        console.log("console log from line 27. Print out all posts");
-        console.log(data);
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts.reverse());

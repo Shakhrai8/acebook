@@ -23,7 +23,7 @@ const GroupForm = ({ onClose }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        onClose(); // close the modal after submitting the form
+        onClose(); 
       })
       .catch((error) => console.error(error));
   };
