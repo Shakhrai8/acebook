@@ -22,7 +22,7 @@ const SignUpForm = ({ onClose }) => {
       }),
     }).then((response) => {
       if (response.status === 201) {
-        onClose(); // Close the modal on successful submission
+        onClose(); 
       }
     });
   };

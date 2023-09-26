@@ -14,7 +14,7 @@ const Modal = ({ children, open, onClose }) => {
         {children}
       </div>
     </div>,
-    document.getElementById("portal") // Consider an element with id 'portal' exists in your HTML
+    document.getElementById("portal") 
   );
 };
 

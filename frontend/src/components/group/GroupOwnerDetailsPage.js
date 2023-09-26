@@ -36,8 +36,8 @@ const GroupOwnerDetailsPage = ({
       },
       body: JSON.stringify({ description }),
     }).then(() => {
-      setShowDescriptionModal(false); // close the modal
-      refetchGroup(); // refetch group data
+      setShowDescriptionModal(false); 
+      refetchGroup(); 
     });
   };
 
@@ -129,7 +129,7 @@ const GroupOwnerDetailsPage = ({
           {posts
             .filter((post) =>
               post.message.toLowerCase().includes(searchTerm.toLowerCase())
-            ) // Add filtering based on searchTerm here
+            ) 
             .map((post) => (
               <div key={post._id} className="post-container">
                 <Post

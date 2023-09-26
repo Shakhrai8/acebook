@@ -22,10 +22,9 @@
   padding: 8px 0;
 }
 
-/* Styling for buttons inside the notification item */
 .notification-item button {
-  background-color: #4267b2; /* Facebook blue */
-  color: white; /* White text */
+  background-color: #4267b2; 
+  color: white; 
   border: none;
   border-radius: 2px;
   padding: 6px 12px;
@@ -35,10 +34,10 @@
 
 /* Hover effect for buttons */
 .notification-item button:hover {
-  background-color: #315498; /* Darker blue for hover */
+  background-color: #315498; 
 }
 
 .highlight {
-  background-color: yellow; /* Choose the color that fits your design */
+  background-color: yellow; 
   transition: background-color 2s ease-out;
 }

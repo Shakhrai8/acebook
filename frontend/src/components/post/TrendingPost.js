@@ -8,12 +8,10 @@ const TrendingPosts = ({ token }) => {
   useEffect(() => {
     fetchTrendingPosts();
 
-    // Setting interval to switch posts every 10 seconds
     const intervalId = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % trendingPosts.length);
     }, 10000);
 
-    // Clearing interval when component is unmounted
     return () => clearInterval(intervalId);
   }, [currentIndex, trendingPosts.length]);
 

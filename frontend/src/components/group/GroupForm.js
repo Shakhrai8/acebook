@@ -1,4 +1,3 @@
-// GroupForm.js
 import React, { useState } from "react";
 
 const GroupForm = ({ onClose }) => {

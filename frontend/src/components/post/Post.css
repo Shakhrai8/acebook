@@ -1,20 +1,20 @@
 .link {
   text-decoration: none;
-  color: black; /* Initial color of the link */
+  color: black; 
 }
 
 .link:hover {
-  color: #007bff; /* Color of the link when the mouse hovers over it */
+  color: #007bff; 
 }
 
 .username {
-  font-weight: bold; /* Makes the username text bold */
-  transition: color 0.3s ease; /* Smooth color transition on hover */
+  font-weight: bold; 
+  transition: color 0.3s ease; 
 }
 
 .member-username:hover,
 .username:hover {
-  color: #28a745; /* Color of the username when the mouse hovers over it */
+  color: #28a745; 
 }
 
 .time {
@@ -95,9 +95,9 @@
 }
 
 .zoomed-image {
-  max-width: 90vw; /* viewport width */
-  max-height: 90vh; /* viewport height */
-  object-fit: contain; /* to maintain aspect ratio */
+  max-width: 90vw; 
+  max-height: 90vh; 
+  object-fit: contain; 
 }
 
 .post-image-container {
@@ -105,15 +105,15 @@
   overflow: hidden;
   cursor: pointer;
   display: flex;
-  justify-content: center; /* for horizontal centering */
-  align-items: center; /* for vertical centering */
+  justify-content: center; 
+  align-items: center; 
 }
 
 .post-image {
   width: 90%;
   height: auto;
   border-radius: 8px;
-  margin: auto; /* this is also needed to ensure the image is centered vertically and horizontally */
+  margin: auto; 
 }
 
 /* Wrapper for PostForm */
@@ -147,7 +147,7 @@
 }
 
 .post-form-title {
-  color: #365899; /* Or any other warm color you prefer */
+  color: #365899;
 }
 
 .post-form button,
@@ -176,7 +176,7 @@
   color: #365899;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
-  font-size: 0; /* This hides the space between inline-block elements */
+  font-size: 0; 
 }
 
 .like-button:hover {
@@ -185,7 +185,7 @@
 
 .like-count {
   color: currentColor;
-  font-size: 16px; /* adjust size as necessary */
+  font-size: 16px; 
   font-weight: bold;
   display: inline-block;
   margin-left: 8px;
@@ -213,15 +213,15 @@
 }
 
 .group-post-main {
-  background-color: #f0f8ff; /* AliceBlue for example */
-  border: 2px solid #1e90ff; /* DodgerBlue for example */
+  background-color: #f0f8ff; 
+  border: 2px solid #1e90ff; 
   padding: 10px;
   margin-bottom: 10px;
 }
 .group-tag {
-  position: absolute; /* added */
-  top: 0; /* added */
-  right: 0; /* added */
+  position: absolute; 
+  top: 0; 
+  right: 0; 
   background-color: #1e90ff;
   color: #ffffff;
   padding: 2px 6px;

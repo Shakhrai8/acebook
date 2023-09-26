@@ -86,7 +86,7 @@ const Feed = ({ navigate, searchTerm, isUserLoggedIn }) => {
           {posts
             .filter((post) =>
               post.message.toLowerCase().includes(searchTerm.toLowerCase())
-            ) // Add filtering based on searchTerm here
+            ) 
             .map((post) => (
               <div key={post._id} className="post-container">
                 <Post

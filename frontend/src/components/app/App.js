@@ -56,7 +56,7 @@ const App = () => {
   useEffect(() => {
     if (token && token !== "null" && token !== "undefined") {
       const decodedToken = jwt_decode(token);
-      setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
+      setUserId(decodedToken.user_id); 
       setIsUserLoggedIn(true);
       const userIdFromStorage = window.localStorage.getItem("userId");
       if (
@@ -191,7 +191,7 @@ const App = () => {
         <LoginForm
           navigate={navigate}
           onClose={() => setShowLoginForm(false)}
-          handleSuccessfulLogin={handleSuccessfulLogin} // <-- pass this method to the LoginForm component
+          handleSuccessfulLogin={handleSuccessfulLogin} 
           setUserId={setUserId}
         />
       )}

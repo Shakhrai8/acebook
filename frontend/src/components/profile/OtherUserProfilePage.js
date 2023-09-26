@@ -57,7 +57,7 @@ const OtherUserProfilePage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        fetchProfileData(); // Fetch profile data again to reflect the updated followers count
+        fetchProfileData(); 
       })
       .catch((error) => {
         console.error("Error:", error);
