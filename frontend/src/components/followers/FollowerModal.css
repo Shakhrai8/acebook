@@ -13,12 +13,14 @@
 
 .close-button {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
   border: none;
-  background: none;
-  font-size: 20px;
   cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 1;
 }
 
 .followers-modal {
@@ -74,7 +76,7 @@
   overflow: hidden;
   margin-right: 15px;
   position: relative;
-  border: 2px solid #007bff; 
+  border: 2px solid #007bff;
 }
 
 .item-card-image img {
@@ -88,7 +90,7 @@
   border-top: 4px solid #3498db;
   width: 60px;
   height: 60px;
-  -webkit-animation: spin 2s linear infinite; 
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
   top: 50%;
@@ -126,9 +128,9 @@
   position: relative;
   top: -40px;
   margin: 0;
-  font-weight: 600; 
-  color: #007bff; 
-  font-size: 18px; 
+  font-weight: 600;
+  color: #007bff;
+  font-size: 18px;
 }
 
 .item-card-action button {
@@ -137,16 +139,16 @@
   border: none;
   background-color: #007bff;
   color: #ffffff;
-  padding: 10px 20px; 
-  border-radius: 20px; 
+  padding: 10px 20px;
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .item-card-action button:hover {
   background-color: #0056b3;
-  box-shadow: 0px 12px 20px -10px rgba(0, 86, 179, 0.6); 
+  box-shadow: 0px 12px 20px -10px rgba(0, 86, 179, 0.6);
 }
 
 .item-card-info-wrapper {
