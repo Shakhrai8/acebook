@@ -19,7 +19,7 @@
 
 .comment-container .comment-text {
   color: #1d2129;
-  margin-bottom: 10px; /* Add margin to separate comments */
+  margin-bottom: 10px; 
 }
 
 /* Redesign comment form */
@@ -57,7 +57,7 @@
 }
 
 .comment-container.own-comment {
-  border: 2px solid #1e90ff; /* DodgerBlue for example */
+  border: 2px solid #1e90ff; 
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -66,22 +66,21 @@
   margin-top: 20px;
 }
 
-/* Add arrows to child comments */
 .comment-container.child-comment {
-  margin-left: 30px; /* Adjust the margin for child comments as needed */
+  margin-left: 30px; 
   position: relative;
-  padding-left: 15px; /* Space between the line and the comment content */
-  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+  padding-left: 15px; 
+  cursor: pointer; 
 }
 
 .comment-container.child-comment::before {
   content: "";
   position: absolute;
   top: 0;
-  left: -15px; /* Adjust the position of the arrow */
+  left: -15px; 
   border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent transparent #f5f6f7; /* Arrow color */
+  border-color: transparent transparent transparent #f5f6f7; 
 }
 
 .comment-container.collapsed .child-comment {
@@ -89,11 +88,9 @@
 }
 
 .comment-container.collapsed::before {
-  /* Adjust the arrow for collapsed comments */
-  transform: rotate(-90deg); /* Rotate the arrow to point right */
+  transform: rotate(-90deg); 
 }
 
 .comment-container.expanded::before {
-  /* Adjust the arrow for expanded comments */
-  transform: rotate(0deg); /* Rotate the arrow to point down */
+  transform: rotate(0deg); 
 }
