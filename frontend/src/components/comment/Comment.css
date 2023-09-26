@@ -17,8 +17,9 @@
   color: #606770;
 }
 
-.comment-container .comment {
+.comment-container .comment-text {
   color: #1d2129;
+  margin-bottom: 10px; /* Add margin to separate comments */
 }
 
 /* Redesign comment form */
@@ -63,4 +64,36 @@
 
 #comment-feed {
   margin-top: 20px;
+}
+
+/* Add arrows to child comments */
+.comment-container.child-comment {
+  margin-left: 30px; /* Adjust the margin for child comments as needed */
+  position: relative;
+  padding-left: 15px; /* Space between the line and the comment content */
+  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+}
+
+.comment-container.child-comment::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -15px; /* Adjust the position of the arrow */
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f5f6f7; /* Arrow color */
+}
+
+.comment-container.collapsed .child-comment {
+  display: none;
+}
+
+.comment-container.collapsed::before {
+  /* Adjust the arrow for collapsed comments */
+  transform: rotate(-90deg); /* Rotate the arrow to point right */
+}
+
+.comment-container.expanded::before {
+  /* Adjust the arrow for expanded comments */
+  transform: rotate(0deg); /* Rotate the arrow to point down */
 }

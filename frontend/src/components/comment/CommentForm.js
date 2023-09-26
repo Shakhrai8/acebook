@@ -6,6 +6,7 @@ const CommentForm = ({
   postId,
   groupId = null,
   postedAsGroup = false,
+  parentId = null,
 }) => {
   const [comment, setComment] = useState("");
 
@@ -16,6 +17,7 @@ const CommentForm = ({
       const requestBody = {
         comment: comment,
         postId: postId,
+        parentId: parentId,
       };
 
       if (groupId) {

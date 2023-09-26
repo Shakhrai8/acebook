@@ -182,19 +182,22 @@ const Post = ({
             <div id="comment-feed">
               {comments &&
                 comments
-                  .filter((comment) => comment.postId === post._id)
+                  .filter(
+                    (comment) =>
+                      comment.postId === post._id && comment.parentId === null
+                  ) 
                   .map((comment) => (
-                    <div key={comment._id}>
-                      <Comment
-                        comment={comment}
-                        onNewComment={handleNewComment}
-                        token={token}
-                        handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                        group={group}
-                        groupId={groupId}
-                        postedAsGroup={postedAsGroup}
-                      />
-                    </div>
+                    <Comment
+                      key={comment._id}
+                      comments={comments}
+                      comment={comment}
+                      onNewComment={handleNewComment}
+                      token={token}
+                      handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                      group={group}
+                      groupId={groupId}
+                      postedAsGroup={postedAsGroup}
+                    />
                   ))}
             </div>
           </>
