@@ -43,18 +43,12 @@ const TrendingPosts = ({ token }) => {
             post={trendingPosts[currentIndex]}
             token={token}
             showCommentForm={false}
-            GroupImage={
-              trendingPosts[currentIndex].groupId
-                ? trendingPosts[currentIndex].groupId.image
-                : null
-            }
-            group={trendingPosts[currentIndex].groupId}
             onUpdatedLikes={handleUpdatedLikes}
-            groupId={
-              trendingPosts[currentIndex].groupId
-                ? trendingPosts[currentIndex].groupId._id
-                : null
-            }
+            {...(trendingPosts[currentIndex].groupId && {
+              GroupImage: trendingPosts[currentIndex].groupId.image,
+              group: trendingPosts[currentIndex].groupId,
+              groupId: trendingPosts[currentIndex].groupId._id,
+            })}
           />
         )}
       </div>
