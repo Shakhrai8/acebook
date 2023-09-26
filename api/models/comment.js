@@ -20,6 +20,10 @@ const CommentSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  parentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comment",
+  },
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);
