@@ -25,6 +25,14 @@ const TrendingPosts = ({ token }) => {
     setTrendingPosts(data.posts);
   };
 
+  const handleUpdatedLikes = (postId, likes) => {
+    setTrendingPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, likes: likes } : post
+      )
+    );
+  };
+
   return (
     <div className="trending-container">
       <h2>Top Liked Posts</h2>
@@ -41,6 +49,7 @@ const TrendingPosts = ({ token }) => {
                 : null
             }
             group={trendingPosts[currentIndex].groupId}
+            onUpdatedLikes={handleUpdatedLikes}
             groupId={
               trendingPosts[currentIndex].groupId
                 ? trendingPosts[currentIndex].groupId._id
