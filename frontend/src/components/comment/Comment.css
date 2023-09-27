@@ -1,10 +1,11 @@
 .comment-container {
   border: 1px solid #dddfe2;
-  padding: 10px;
   background-color: #f5f6f7;
-  margin-left: 15px;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
+  margin-bottom: 10px; 
+  overflow: hidden; 
+  position: relative; 
 }
 
 .comment-container:hover {
@@ -22,75 +23,62 @@
   margin-bottom: 10px;
 }
 
-/* Redesign comment form */
+.comment-container .like-button,
+.comment-container .reply-button,
+.comment-container .expand-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex; 
+  align-items: center; 
+}
+
+.comment-container .like-button {
+  background-color: #4267b2;
+  color: #fff;
+  margin-right: 10px; 
+}
+
+.comment-container .like-button:hover {
+  background-color: #365899;
+}
+
+.comment-container .reply-button,
+.comment-container .expand-button {
+  background-color: #ccc; 
+  color: #333; 
+  margin-right: 10px; 
+}
+
 .comment-form {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  padding: 10px; 
+  background-color: #fff; 
+  border: 1px solid #dddfe2;
+  border-radius: 5px;
 }
 
 .comment-form input {
   flex-grow: 1;
   height: 35px;
   padding: 10px;
-  border: 1px solid #ccd0d5;
+  border: none; 
   border-radius: 20px;
 }
 
 .comment-form button {
-  padding: 8px 16px;
-  background-color: #4267b2;
-  color: #fff;
+  background: none;
   border: none;
-  border-radius: 4px;
+  padding: 0;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
 
-.comment-form button:hover {
-  background-color: #365899;
-}
-
-.interactive-area {
+.expand-button {
+  font-size: 1.2em; 
+  margin-right: 0; 
   display: flex;
-  justify-content: flex-end;
-}
-
-.comment-container.own-comment {
-  border: 2px solid #1e90ff;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-#comment-feed {
-  margin-top: 20px;
-}
-
-.comment-container.child-comment {
-  margin-left: 30px;
-  position: relative;
-  padding-left: 15px;
-  cursor: pointer;
-}
-
-.comment-container.child-comment::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -15px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent transparent transparent #f5f6f7;
-}
-
-.comment-container.collapsed .child-comment {
-  display: none;
-}
-
-.comment-container.collapsed::before {
-  transform: rotate(-90deg);
-}
-
-.comment-container.expanded::before {
-  transform: rotate(0deg);
+  align-items: center;
 }

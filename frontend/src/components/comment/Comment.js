@@ -68,15 +68,20 @@ const Comment = ({
     return null;
   };
 
+  const hasSubcomments = comments.some(
+    (subcomment) => subcomment.parentId === comment._id
+  );
+
   return (
     <div
       className={`comment-container ${
         comment.postedAsGroup ? "own-comment" : ""
-      } ${comment.parentId ? "child-comment" : ""}`}
+      } ${hasSubcomments ? "has-subcomments" : ""} ${
+        expanded ? "expanded" : "collapsed"
+      }`}
       data-cy="comment"
       key={comment._id}
       id={comment._id}
-      onClick={handleToggleExpand}
     >
       <div className="author-details">
         {comment.postedAsGroup && <div className="group-tag">Creator</div>}
@@ -113,33 +118,37 @@ const Comment = ({
             <span id="comment-like-counter" className="like-count">
               {comment.likes ? comment.likes.length : 0}
             </span>
-            <button onClick={handleToggleReply}>Reply</button>
+          </div>
+          <button onClick={handleToggleReply} className="reply-button">
+            Reply
+          </button>
+          <div className="expand-button" onClick={handleToggleExpand}>
+            {hasSubcomments && (expanded ? "Collapse" : "Expand")}
           </div>
         </div>
       </div>
       {renderReplyForm()}
-      <div
-        id="comment-feed"
-        className={`comment-container ${expanded ? "expanded" : "collapsed"}`}
-      >
-        {comments &&
-          comments
-            .filter((reply) => reply.parentId === comment._id)
-            .map((reply) => (
-              <div key={reply._id}>
-                <Comment
-                  comment={reply}
-                  comments={comments}
-                  onNewComment={onNewComment}
-                  token={token}
-                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                  group={group}
-                  groupId={groupId}
-                  postedAsGroup={postedAsGroup}
-                />
-              </div>
-            ))}
-      </div>
+      {expanded && hasSubcomments && (
+        <div id="comment-feed" className={`comment-container expanded`}>
+          {comments &&
+            comments
+              .filter((reply) => reply.parentId === comment._id)
+              .map((reply) => (
+                <div key={reply._id}>
+                  <Comment
+                    comment={reply}
+                    comments={comments}
+                    onNewComment={onNewComment}
+                    token={token}
+                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                    group={group}
+                    groupId={groupId}
+                    postedAsGroup={postedAsGroup}
+                  />
+                </div>
+              ))}
+        </div>
+      )}
     </div>
   );
 };
