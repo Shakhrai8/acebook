@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
@@ -61,18 +61,21 @@ const Post = ({
     }
   }, [post, token]);
 
+  const authorId = useMemo(() => post.authorId, [post.authorId]);
+
   useEffect(() => {
-    if (post.authorId) {
-      fetch(`/profiles/${post.authorId}/profileImage`, {
+    if (authorId) {
+      fetch(`/profiles/${authorId}/profileImage`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.blob())
         .then((blob) => {
           const objectURL = URL.createObjectURL(blob);
           setAuthorImgSrc(objectURL);
+          console.log("first");
         });
     }
-  }, [post, token]);
+  }, [authorId, token]);
 
   useEffect(() => {
     if (idToScrollTo) {
@@ -185,7 +188,7 @@ const Post = ({
                   .filter(
                     (comment) =>
                       comment.postId === post._id && comment.parentId === null
-                  ) 
+                  )
                   .map((comment) => (
                     <Comment
                       key={comment._id}

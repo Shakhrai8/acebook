@@ -19,7 +19,7 @@
 
 .comment-container .comment-text {
   color: #1d2129;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 /* Redesign comment form */
@@ -57,7 +57,7 @@
 }
 
 .comment-container.own-comment {
-  border: 2px solid #1e90ff; 
+  border: 2px solid #1e90ff;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -67,20 +67,20 @@
 }
 
 .comment-container.child-comment {
-  margin-left: 30px; 
+  margin-left: 30px;
   position: relative;
-  padding-left: 15px; 
-  cursor: pointer; 
+  padding-left: 15px;
+  cursor: pointer;
 }
 
 .comment-container.child-comment::before {
   content: "";
   position: absolute;
   top: 0;
-  left: -15px; 
+  left: -15px;
   border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent transparent #f5f6f7; 
+  border-color: transparent transparent transparent #f5f6f7;
 }
 
 .comment-container.collapsed .child-comment {
@@ -88,9 +88,9 @@
 }
 
 .comment-container.collapsed::before {
-  transform: rotate(-90deg); 
+  transform: rotate(-90deg);
 }
 
 .comment-container.expanded::before {
-  transform: rotate(0deg); 
+  transform: rotate(0deg);
 }
