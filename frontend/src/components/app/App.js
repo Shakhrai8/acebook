@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,6 +15,7 @@ import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
 import TopGroups from "../group/TopGroups";
+import { isTokenExpired } from "../common/TokenExpirationChecker";
 
 import OtherUserProfilePage from "../profile/OtherUserProfilePage";
 import FollowerModal from "../followers/FollowerModal";
@@ -54,18 +56,30 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (token && token !== "null" && token !== "undefined") {
-      const decodedToken = jwt_decode(token);
-      setUserId(decodedToken.user_id); 
-      setIsUserLoggedIn(true);
-      const userIdFromStorage = window.localStorage.getItem("userId");
-      if (
-        userIdFromStorage &&
-        userIdFromStorage !== "null" &&
-        userIdFromStorage !== "undefined"
-      ) {
-        setUserId(userIdFromStorage); // Restore userId from localStorage
-      }
+    const token = window.localStorage.getItem("token");
+
+    if (!token || token === "null" || token === "undefined") {
+      navigate("/logout"); 
+      return; 
+    }
+
+    const decodedToken = jwt_decode(token);
+
+    if (!decodedToken || !decodedToken.user_id) {
+      navigate("/login"); 
+      return; 
+    }
+
+    setUserId(decodedToken.user_id);
+    setIsUserLoggedIn(true);
+
+    const userIdFromStorage = window.localStorage.getItem("userId");
+    if (
+      userIdFromStorage &&
+      userIdFromStorage !== "null" &&
+      userIdFromStorage !== "undefined"
+    ) {
+      setUserId(userIdFromStorage); 
     }
   }, []);
 
@@ -191,7 +205,7 @@ const App = () => {
         <LoginForm
           navigate={navigate}
           onClose={() => setShowLoginForm(false)}
-          handleSuccessfulLogin={handleSuccessfulLogin} 
+          handleSuccessfulLogin={handleSuccessfulLogin}
           setUserId={setUserId}
         />
       )}
