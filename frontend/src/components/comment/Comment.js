@@ -16,7 +16,7 @@ const Comment = ({
   const [liked, setLiked] = useState(false);
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const currentUserId = localStorage.getItem("userId");
 
   const handleCommentLike = async () => {
@@ -73,83 +73,91 @@ const Comment = ({
   );
 
   return (
-    <div
-      className={`comment-container ${
-        comment.postedAsGroup ? "own-comment" : ""
-      } ${hasSubcomments ? "has-subcomments" : ""} ${
-        expanded ? "expanded" : "collapsed"
-      }`}
-      data-cy="comment"
+    <details
+      open={expanded}
+      className={`comment`}
+      id={`comment-${comment._id}`}
       key={comment._id}
-      id={comment._id}
     >
-      <div className="author-details">
-        {comment.postedAsGroup && <div className="group-tag">Creator</div>}
-        <div className="text-details">
-          <Link
-            to={
-              currentUserId === comment.authorId
-                ? `/profiles/${comment.authorId}`
-                : `/users/${comment.authorId}`
-            }
-            className="link"
-          >
-            <div className="username">
-              @{comment.postedAsGroup ? group?.name : comment.username}
-            </div>
-          </Link>
-          <div className="time">{comment.time}</div>
+      <a href={`#comment-${comment._id}`} className="comment-border-link">
+        <span className="sr-only">Jump to comment-{comment._id}</span>
+      </a>
+      <summary>
+        <div className="comment-heading">
+          <div className="comment-info">
+            <Link
+              to={
+                currentUserId === comment.authorId
+                  ? `/profiles/${comment.authorId}`
+                  : `/users/${comment.authorId}`
+              }
+              className="comment-author"
+            >
+              {comment.postedAsGroup ? group?.name : comment.username}
+            </Link>
+            <p className="m-0">
+              {comment.likes ? comment.likes.length : 0} points &bull;{" "}
+              {comment.time}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="comment-content">
-        <div className="comment-text">{comment.comment}</div>
-        <div className="interactive-area">
+      </summary>
+
+      <div className="comment-body">
+        <p className="comment-text">{comment.comment}</p>
+        <div className="button-container">
           <div
             id="comment-like"
-            className="like-button"
+            className={`like-button ${liked ? "liked" : ""}`}
             onClick={handleCommentLike}
           >
             <svg
-              className={`like-icon ${liked ? "liked" : ""}`}
-              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`upvote-icon ${liked ? "liked" : ""}`}
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#2c3e50"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              <path d="M9.719,17.073l-6.562-6.51c-0.27-0.268-0.504-0.567-0.696-0.888C1.385,7.89,1.67,5.613,3.155,4.14c0.864-0.856,2.012-1.329,3.233-1.329c1.924,0,3.115,1.12,3.612,1.752c0.499-0.634,1.689-1.752,3.612-1.752c1.221,0,2.369,0.472,3.233,1.329c1.484,1.473,1.771,3.75,0.693,5.537c-0.19,0.32-0.425,0.618-0.695,0.887l-6.562,6.51C10.125,17.229,9.875,17.229,9.719,17.073 M6.388,3.61C5.379,3.61,4.431,4,3.717,4.707C2.495,5.92,2.259,7.794,3.145,9.265c0.158,0.265,0.351,0.51,0.574,0.731L10,16.228l6.281-6.232c0.224-0.221,0.416-0.466,0.573-0.729c0.887-1.472,0.651-3.346-0.571-4.56C15.57,4,14.621,3.61,13.612,3.61c-1.43,0-2.639,0.786-3.268,1.863c-0.154,0.264-0.536,0.264-0.69,0C9.029,4.397,7.82,3.61,6.388,3.61"></path>
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 20v-8h-3.586a1 1 0 0 1 -.707 -1.707l6.586 -6.586a1 1 0 0 1 1.414 0l6.586 6.586a1 1 0 0 1 -.707 1.707h-3.586v8a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
             </svg>
-            <span id="comment-like-counter" className="like-count">
-              {comment.likes ? comment.likes.length : 0}
-            </span>
+            {comment.likes ? comment.likes.length : 0} points
           </div>
-          <button onClick={handleToggleReply} className="reply-button">
+
+          <button
+            type="button"
+            onClick={handleToggleReply}
+            className="reply-button"
+          >
             Reply
           </button>
-          <div className="expand-button" onClick={handleToggleExpand}>
-            {hasSubcomments && (expanded ? "Collapse" : "Expand")}
-          </div>
         </div>
       </div>
       {renderReplyForm()}
-      {expanded && hasSubcomments && (
-        <div id="comment-feed" className={`comment-container expanded`}>
-          {comments &&
-            comments
-              .filter((reply) => reply.parentId === comment._id)
-              .map((reply) => (
-                <div key={reply._id}>
-                  <Comment
-                    comment={reply}
-                    comments={comments}
-                    onNewComment={onNewComment}
-                    token={token}
-                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                    group={group}
-                    groupId={groupId}
-                    postedAsGroup={postedAsGroup}
-                  />
-                </div>
-              ))}
-        </div>
-      )}
-    </div>
+      <div className="replies">
+        {hasSubcomments &&
+          comments
+            .filter((reply) => reply.parentId === comment._id)
+            .map((reply) => (
+              <Comment
+                key={reply._id}
+                comment={reply}
+                comments={comments}
+                onNewComment={onNewComment}
+                token={token}
+                handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                group={group}
+                groupId={groupId}
+                postedAsGroup={postedAsGroup}
+              />
+            ))}
+      </div>
+    </details>
   );
 };
 

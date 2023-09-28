@@ -54,16 +54,20 @@ const CommentForm = ({
   };
 
   return (
-    <form className="comment-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
+    <form
+      className="comment-form"
+      onSubmit={handleSubmit}
+      class="comment-form d-none"
+    >
+      <textarea
         id="comment"
         name="comment"
-        placeholder="Write a comment..."
+        placeholder="Reply to comment"
+        rows="4"
         required
         value={comment}
         onChange={handleCommentChange}
-      />
+      ></textarea>
       <button id="comment-post-button" type="submit">
         Post
       </button>
