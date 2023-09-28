@@ -93,7 +93,7 @@ const Comment = ({
               }
               className="comment-author"
             >
-              {comment.postedAsGroup ? group?.name : comment.username}
+              @{comment.postedAsGroup ? group?.name : comment.username}
             </Link>
             <p className="m-0">
               {comment.likes ? comment.likes.length : 0} points &bull;{" "}
