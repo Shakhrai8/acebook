@@ -153,7 +153,7 @@ const Post = ({
         </div>
       </summary>
 
-      <div className="post-body">
+      <div className="post-body" id={post._id}>
         <p className="post-text">{post.message}</p>
         {imgSrc && (
           <div

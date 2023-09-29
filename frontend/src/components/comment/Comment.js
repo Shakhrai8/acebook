@@ -103,7 +103,7 @@ const Comment = ({
         </div>
       </summary>
 
-      <div className="comment-body">
+      <div className="comment-body" id={comment._id}>
         <p className="comment-text">{comment.comment}</p>
         <div className="button-container">
           <div
