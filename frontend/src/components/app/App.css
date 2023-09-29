@@ -37,7 +37,7 @@ body {
 
 .main-content {
   display: flex;
-  height: calc(100% - 60px); 
+  height: calc(100% - 60px);
   justify-content: space-between;
 }
 
@@ -114,11 +114,11 @@ body {
   border-radius: 4px;
   padding: 8px 16px;
   margin: 4px 0;
-  color: #fff; 
+  color: #fff;
   text-align: left;
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none;
   font-size: 0.7em;
 }
 
@@ -159,16 +159,16 @@ a.side {
 li.menu_list .front {
   background-color: #4267b2;
   color: #fff;
-  font-size: 0.6em; 
-  font-weight: bold; 
+  font-size: 0.6em;
+  font-weight: bold;
   transform-origin: 0 0;
 }
 
 a.side {
   background-color: #fff;
   color: #4267b2;
-  font-size: 0.6em; 
-  font-weight: bold; 
+  font-size: 0.6em;
+  font-weight: bold;
   transform-origin: 0 0 85px;
   transform: rotateY(-90deg);
 }
@@ -194,7 +194,7 @@ li.menu_list:hover .front {
 .top-groups-container,
 .users-to-follow-container,
 .trending-container {
-  flex-basis: 100%; 
+  flex-basis: 100%;
   position: relative;
   overflow: auto; /* provides a scrollbar when content overflows */
   border-left: 3px solid #ccc;
@@ -223,26 +223,26 @@ li.menu_list:hover .front {
 .user-recomendation-box {
   display: flex;
   align-items: center;
-  gap: 10px; 
-  margin-bottom: 1.5em; 
+  gap: 10px;
+  margin-bottom: 1.5em;
 }
 
 .author-image {
   border-radius: 50%;
-  width: 50px; 
-  height: 50px; 
+  width: 50px;
+  height: 50px;
 }
 
 .username {
   flex-grow: 1;
-  text-align: left; 
+  text-align: left;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 .top-right {
   display: flex;
-  gap: 20px; 
+  gap: 20px;
   justify-content: flex-end;
 }
 
@@ -253,8 +253,8 @@ li.menu_list:hover .front {
   font-size: 1.2em;
   text-transform: uppercase;
   font-weight: 500;
-  display: flex; 
-  position: relative; 
+  display: flex;
+  position: relative;
 }
 
 .feed-button,

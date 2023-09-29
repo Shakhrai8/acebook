@@ -121,16 +121,12 @@ const Post = ({
   };
 
   return (
-    // <div
-    //   className={`post-wrapper ${post.postedAsGroup ? "group-post-main" : ""}`}
-    // >
-    <>
-      <a href={`#post-${post._id}`} className="post-border-link">
-        <span className="sr-only">Jump to comment-{post._id}</span>
-      </a>
-      <summary>
+    <div
+      className={`post-wrapper ${post.postedAsGroup ? "group-post-main" : ""}`}
+    >
+      <summary className="summary">
         <div className="post-heading">
-          {/* {post.postedAsGroup && <div className="group-tag">Creator</div>} */}
+          {post.postedAsGroup && <div className="group-tag">Creator</div>}
           <div className="author">
             <img
               className="author-image"
@@ -138,6 +134,7 @@ const Post = ({
               alt="Author"
             />
           </div>
+
           <div className="post-info">
             <Link
               to={
@@ -221,31 +218,31 @@ const Post = ({
             Reply
           </button>
         </div>
-      </div>
 
-      {renderReplyForm()}
-      <div id="comment-feed">
-        {comments &&
-          comments
-            .filter(
-              (comment) =>
-                comment.postId === post._id && comment.parentId === null
-            )
-            .map((comment) => (
-              <Comment
-                key={comment._id}
-                comments={comments}
-                comment={comment}
-                onNewComment={handleNewComment}
-                token={token}
-                handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                group={group}
-                groupId={groupId}
-                postedAsGroup={postedAsGroup}
-              />
-            ))}
+        {renderReplyForm()}
+        <div id="comment-feed">
+          {comments &&
+            comments
+              .filter(
+                (comment) =>
+                  comment.postId === post._id && comment.parentId === null
+              )
+              .map((comment) => (
+                <Comment
+                  key={comment._id}
+                  comments={comments}
+                  comment={comment}
+                  onNewComment={handleNewComment}
+                  token={token}
+                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  group={group}
+                  groupId={groupId}
+                  postedAsGroup={postedAsGroup}
+                />
+              ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
