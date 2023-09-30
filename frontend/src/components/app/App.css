@@ -51,7 +51,6 @@ body {
   border-radius: 8px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 600px;
 }
 
 .top-bar {
@@ -175,13 +174,13 @@ a.side {
 
 li.menu_list:hover a.side {
   background-color: #365899;
-  color: #fff; 
+  color: #fff;
   transform: rotateY(0deg);
 }
 
 li.menu_list:hover .front {
   background-color: #365899;
-  color: #fff; 
+  color: #fff;
   transform: rotateY(90deg);
 }
 
@@ -190,7 +189,7 @@ li.menu_list:hover .front {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 300px; /* Adjust the width as needed */
+  width: 500px; 
 }
 
 /* Styling for the individual modules */
@@ -246,7 +245,6 @@ li.menu_list:hover .front {
   color: #3498db;
   text-decoration: none;
 }
-
 
 /* Styling for when there are no groups to display */
 .users-to-follow-container p {
