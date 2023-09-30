@@ -23,10 +23,11 @@ const Post = ({
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [authorImgSrc, setAuthorImgSrc] = useState(null);
-  const [liked, setLiked] = useState(
-    localStorage.getItem(`post_${post._id}_liked`) === "true"
-  );
   const currentUserId = localStorage.getItem("userId");
+  const [liked, setLiked] = useState(
+    localStorage.getItem(`post_${post._id}_liked_${currentUserId}`) === "true"
+  );
+
   const idToScrollTo = window.localStorage.getItem("scrollToId");
 
   const onClose = () => {
@@ -52,7 +53,10 @@ const Post = ({
   const handlePostLike = async () => {
     const newLiked = !liked;
     setLiked(newLiked);
-    localStorage.setItem(`post_${post._id}_liked`, newLiked.toString());
+    localStorage.setItem(
+      `post_${post._id}_liked_${currentUserId}`,
+      newLiked.toString()
+    );
 
     const response = await fetch(`/posts/${post._id}/like`, {
       method: "PUT",
