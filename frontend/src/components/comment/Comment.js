@@ -13,14 +13,19 @@ const Comment = ({
   groupId,
   postedAsGroup,
 }) => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(
+    localStorage.getItem(`comment_${comment._id}_liked`) === "true"
+  );
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [expanded, setExpanded] = useState(true);
   const currentUserId = localStorage.getItem("userId");
 
   const handleCommentLike = async () => {
-    setLiked(!liked);
+    const newLiked = !liked;
+    setLiked(newLiked);
+    localStorage.setItem(`comment_${comment._id}_liked`, newLiked.toString());
+    
     const response = await fetch(`/comments/${comment._id}/like`, {
       method: "PUT",
       headers: {

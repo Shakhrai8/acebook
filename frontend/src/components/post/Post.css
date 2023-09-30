@@ -389,7 +389,7 @@ button:active {
   margin-top: 10px;
 }
 
-.upvote-icon.liked {
+.upvote-button.liked {
   fill: #4267b2;
 }
 
