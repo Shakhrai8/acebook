@@ -6,7 +6,7 @@ const SearchBar = ({ setSearchTerm }) => {
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search for posts..."
         onChange={(event) => setSearchTerm(event.target.value)}
       />
     </div>
