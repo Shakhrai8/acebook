@@ -30,7 +30,7 @@ const UsersToFollow = ({ token, currentUserId }) => {
   };
 
   return (
-    <div className="users-to-follow-container">
+    <>
       <h2>People you may want to follow</h2>
       {users.length === 0 ? (
         <p>No more people to follow!</p>
@@ -48,7 +48,7 @@ const UsersToFollow = ({ token, currentUserId }) => {
           </div>
         ))
       )}
-    </div>
+    </>
   );
 };
 
