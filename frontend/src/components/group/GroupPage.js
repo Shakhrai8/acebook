@@ -24,7 +24,7 @@ const GroupPage = () => {
         console.log(groups);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [groups]);
 
   return (
     <div className="groups-content">
