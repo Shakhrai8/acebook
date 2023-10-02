@@ -10,6 +10,18 @@ const SignUpForm = ({ onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!isEmailValid(email)) {
+      window.alert("Please enter a valid email address");
+      return;
+    }
+
+    if (!isStrongPassword(password)) {
+      window.alert(
+        "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character"
+      );
+      return;
+    }
+
     fetch("/user", {
       method: "post",
       headers: {
@@ -22,7 +34,7 @@ const SignUpForm = ({ onClose }) => {
       }),
     }).then((response) => {
       if (response.status === 201) {
-        onClose(); 
+        onClose();
       }
     });
   };
@@ -37,6 +49,17 @@ const SignUpForm = ({ onClose }) => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+
+  const isEmailValid = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  const isStrongPassword = (password) => {
+    const passwordPattern =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+    return passwordPattern.test(password);
   };
 
   return (
