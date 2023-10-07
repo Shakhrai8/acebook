@@ -34,7 +34,7 @@ const TrendingPosts = ({ token }) => {
   };
 
   return (
-    <div className="trending-container">
+    <div>
       <h2>Top Liked Posts</h2>
       <div className="post-stage">
         {trendingPosts.length > 0 && (
